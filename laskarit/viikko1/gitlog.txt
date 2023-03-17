@@ -1,0 +1,107 @@
+elsar@DESKTOP-QL99NO0:/mnt/c/users/elsar/dev/ohjelmistotekniikka/ot_viikko1/tiedostoja$ git log --stat | cat
+commit 3a7dbf40be252845d361eb55f0787200a41d3718
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 09:50:29 2023 +0200
+
+    remove file1 and rename file 2 to file 22
+
+ tiedostoja/file2.txt                 | 0
+ tiedostoja/{file1.txt => file22.txt} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 4240534d1eb2a9b270d57a59db440ca8a7f3c7a7
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 09:40:41 2023 +0200
+
+    file 1 , 2, 3
+
+ eka.txt              | 2 +-
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 4 files changed, 1 insertion(+), 1 deletion(-)
+
+commit d8a1f0b32ac3c04e5eaa031bb744890dbb8137e7
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 09:09:41 2023 +0200
+
+    git add -p
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 47d8fe39980ad40c1fc8edf6ee8d18c264c8b953
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 08:56:44 2023 +0200
+
+    rename tiedosto.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 406e4a479130cf1e3285459ae2090504be3c0253
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 08:55:33 2023 +0200
+
+    toinen.txt poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 34f8eed5a73fa5e0fee9b4001615d889eb2f39a9
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 08:44:17 2023 +0200
+
+    muutos tiedostoon tiedosto.txt
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 678e76cfe2f172dc7fcfed1e63e053d47cb2f395
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Fri Mar 17 08:41:42 2023 +0200
+
+    lisätty tekstiä tiedosto.txt
+
+ kolmas.txt   | 1 +
+ tiedosto.txt | 2 +-
+ toinen.txt   | 1 +
+ 3 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 4056aa5bf1afcb51054f097f109e356e269e4bfc
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Wed Mar 15 17:36:14 2023 +0200
+
+    changes in files and adding file stuff
+
+ stuff/hello.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 67e01f8ffff754b1c59d4ccf189b2f8eb4b5e627
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Wed Mar 15 17:34:17 2023 +0200
+
+    adding kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit cb0806aca5469d50c375593b8f1ffff910ed63c5
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Wed Mar 15 17:32:40 2023 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit ccd7458513bb8f71380d078a57eaaee68f3d6ac9
+Author: Elsa <elsaryynanen@outlook.com>
+Date:   Wed Mar 15 17:30:46 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
