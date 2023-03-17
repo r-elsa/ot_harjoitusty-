@@ -1,3 +1,4 @@
+
 elsar@DESKTOP-QL99NO0:/mnt/c/users/elsar/dev/ohjelmistotekniikka/ot_viikko1/tiedostoja$ git log --stat | cat
 commit 3a7dbf40be252845d361eb55f0787200a41d3718
 Author: Elsa <elsaryynanen@outlook.com>
@@ -105,3 +106,5 @@ Date:   Wed Mar 15 17:30:46 2023 +0200
 
  tiedosto.txt | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
+ 
+ 
