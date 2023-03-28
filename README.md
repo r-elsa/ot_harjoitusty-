@@ -12,7 +12,7 @@
 
 [laskarit](https://github.com/r-elsa/ot_harjoitustyo/tree/master/laskarit/viikko2)
 
-[Harjoitustyö](https://github.com/r-elsa/flashcards)
+[Harjoitustyö](https://github.com/r-elsa/twitter_app/blob/master/documentation/requirementspecification.md)
 
 
 
