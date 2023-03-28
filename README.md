@@ -12,7 +12,8 @@
 
 [laskarit](https://github.com/r-elsa/ot_harjoitustyo/tree/master/laskarit/viikko2)
 
-[Harjoitustyö](https://github.com/r-elsa/twitter_app/blob/master/documentation/requirementspecification.md)
+[Harjoitustyö, vaatimusmäärittely ](https://github.com/r-elsa/twitter_app/blob/master/documentation/requirementspecification.md)
+[Harjoitustyö, työkirjanpito ](https://github.com/r-elsa/twitter_app/blob/master/documentation/timeaccounting.md)
 
 
 
