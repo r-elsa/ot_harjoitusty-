@@ -6,8 +6,8 @@
       Monopolipeli "1" -- "2..8" Pelaaja
       Monopolipeli "1" -- "1" Pelilauta
       Pelaaja "1" -- "1" Pelinappula
-      Pelilauta "1" <-- "40" Ruutu
-      Pelinappula "*" --> "1" Ruutu
+      Pelilauta "1" -- "40" Ruutu
+      Pelinappula "*" -- "1" Ruutu
       class Monopolipeli{
           id
           
