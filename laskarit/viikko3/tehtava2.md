@@ -6,104 +6,111 @@
       Monopolipeli "1" -- "2..8" Pelaaja
       Monopolipeli "1" -- "1" Pelilauta
       
-      Monopolipeli "1" -- "1" Aloitusruutu
-      Monopolipeli "1" -- "1" Vankila
+      Monopolipeli  ..>  Aloitusruutu
+      Monopolipeli  ..>  Vankila
       
-      Pelaaja "1" --> "1" Pelinappula
-      Pelilauta "1" --> "40" Ruutu
+      Pelaaja "1" -- "1" Pelinappula
+      Pelilauta "1" -- "40" Ruutu
       Pelinappula "*" -- "1" Ruutu
       
-      Ruutu "1" o-- "1" Aloitusruutu 
-      Ruutu "1" o-- "1" Vankila
-      Ruutu "*" o-- "1" Sattuma_ja_yhteismaa
-      Ruutu "*" o-- "1" Asemat_ja_laitokset
-      Ruutu "*" o-- "1" Normaalikatu    
+      Ruutu  <|-- Aloitusruutu 
+      Ruutu  <|--  Vankila
+      Ruutu  <|--  Sattuma_ja_yhteismaa
+      Ruutu  <|--  Asemat_ja_laitokset
+      Ruutu  <|--  Normaalikatu    
+      Ruutu "*" -- "1" Toiminto
       
       Sattuma_ja_yhteismaa "*" -- "*" Kortti
       Toiminto "*" -- "1" Kortti
       Talo "0..4" -- "1" Normaalikatu
       Hotelli "0..1" -- "1" Normaalikatu
-      Normaalikatu "*"--> "1" Pelaaja
-      Raha "*" -- "1" Pelaaja
+      Normaalikatu "*"-- "1" Pelaaja
+      Rahamäärä "1" -- "1" Pelaaja
       
       
       class Monopolipeli{
-          id
+          -id : int
           
       }
       class Noppa{
-          id
-	  arvo
-          
+          -id : int
+	  -arvo: int
+   
       }
 	class Pelaaja{
-          nimi
-          
-          
+	  -id : int
+          -nimi : string
+	    
       }
 	class Pelilauta{
-	  id
-                    
-          
+	  -id : int
+                         
       }
+      
 	class Ruutu{
-          ruutuarvo
-          seuraava_ruutuarvo
+	  -id : int
+          -ruutuarvo : int
+          -seuraava_ruutuarvo : int
           
       }
 	 class Pelinappula{
-          nimi
-          
-          
+	  -id : int
+          -nimi : string   
       }
+      
       class Aloitusruutu{
-          sijainti
+          -id : int
+          -sijainti : Ruutu id
      
      }
        class Vankila{
-          sijainti
-          
-          
+          -id : int
+          -sijainti : Ruutu id   
       }
+      
        class Sattuma_ja_yhteismaa{
-          sijainti
-          
-          
+          -id : int
+          -sijainti : Ruutu id 
       }
+      
       class Asemat_ja_laitokset{
-      sijainti
-      
+      	-id : int
+      	-sijainti: Ruutu id
       }
+      
       class Normaalikatu{
-          sijainti
-          nimi  
-          
+          -id : int
+          -sijainti : Ruutu id
+          -nimi : string
+	  -omistaja: Pelaaja id    
       }
+      
       class Toiminto{
-          laatu
-            
-     
+          -id : int
+          -laatu : string
       }
+      
       class Kortti{
-          omistaja
-           
-     
+          -id : int
+          -omistaja : Pejaaja id
       }
+      
       class Talo{
-          arvo
-          eihotellia
-              
-     
+          -id : int
+          -arvo : int
+          -eihotellia : boolean
       }
+      
       class Hotelli{
-      arvo
-      eitaloa
+      -id : int
+      -arvo : int
+      -eitaloa : boolean
       }
       
-      class Raha{
-      arvo
-      
+       class Rahamäärä{
+      -id : int
+      -arvo : int
       }
-      
+       
 
 ```
