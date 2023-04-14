@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "twitter-app"
+version = "0.1.0"
+description = ""
+authors = ["Elsa <elsaryynanen@outlook.com>"]
+readme = "README.md"
+packages = [{include = "twitter_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+invoke = "^2.0.0"
+coverage = "^7.2.2"
+pytest = "^7.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
