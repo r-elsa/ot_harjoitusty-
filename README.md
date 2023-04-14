@@ -17,4 +17,15 @@
 [Harjoitustyö, työkirjanpito](https://github.com/r-elsa/twitter_app/blob/master/documentation/timeaccounting.md)
 
 
+### *Viikko 3*
+
+[laskarit](https://github.com/r-elsa/ot_harjoitustyo/tree/master/laskarit/viikko3)
+
+[Harjoitustyö](https://github.com/r-elsa/twitter_app/)
+
+[Harjoitustyö, työkirjanpito](https://github.com/r-elsa/twitter_app/blob/master/documentation/timeaccounting.md)
+
+### *Viikko 4*
+
+[Harjoitustyö](https://github.com/r-elsa/twitter_app/)
 
