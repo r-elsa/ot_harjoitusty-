@@ -1,11 +1,15 @@
 from tkinter import Tk, ttk, W
 from services.user_service import UserService
-
+from services.tweet_service import TweetService
+import time
 
 class UI:
     def __init__(self, root):
         self._root = root
         self._current_view = None
+        self.username = None
+        self.tweet_service= TweetService()
+        self.user_service =  UserService()
     
 
     def hide_current_view(self):
@@ -13,43 +17,41 @@ class UI:
         for l in list:
             l.destroy()
 
-    def handle_register(self, event=None):
-       
+    def handle_register(self, event=None):   
         name = self.name.get()
         username = self.username.get()
         password = self.password.get()
 
+        self.user_service.create_user(name, username, password)
+        self.user_service.create_user("Elsa", "elsauser", "elsapwd")
+        self.user_service.create_user("Maija", "maijauser", "maijapwd")
+        self.user_service.create_user("Lia", "liauser", "liapwd")
+        self.user_service.create_user("Anna", "annauser", "annapwd")
+        self.user_service.create_user("Veera", "veerauser", "verapwd")
+        self.user_service.return_users()
+
+        self.username= username
+        self.show_dashboard()
+
+    
+    def handle_login(self, event=None):
+        username = self.username.get()
+        password = self.password.get()
+
         instance = UserService()
-        """ instance.check_if_user_already_exists() """
-        instance.create_user(name, username, password)
         instance.create_user("Elsa", "elsauser", "elsapwd")
         instance.create_user("Maija", "maijauser", "maijapwd")
         instance.create_user("Lia", "liauser", "liapwd")
         instance.create_user("Anna", "annauser", "annapwd")
         instance.create_user("Veera", "veerauser", "verapwd")
-        instance.return_users()
-
-        # check if user exists (username already exists)
-
-        # if username not exists --> create user
-
-        self.show_dashboard()
-
-    
-    def handle_login(self, event=None):
-       
-        username = self.username.get()
-        password = self.password.get()
-
-        instance = UserService()
         instance.login(username, password)
         instance.return_users()
+        self.username= username
         self.show_dashboard()
     
     
     def show_login_page(self, event=None):
         self.hide_current_view()
-  
         heading = ttk.Label(master=self._root, text="Login",
                             foreground="white",  background="black")
 
@@ -119,33 +121,31 @@ class UI:
     
 
     def show_dashboard(self):
+     
         self.hide_current_view()
-  
         heading = ttk.Label(master=self._root, text="Dashboard",
                             foreground="white",  background="black")
-        heading.grid(row=0, column=0, columnspan=2, sticky=W)
-
+     
         tweet = ttk.Label(master=self._root, text="Tweet")
-        tweet.grid(row=3, column=0)
-
         self.tweet = ttk.Entry(master=self._root)
-        self.tweet.grid(row=1, column=1)
-
-      
+     
+        tweet.grid(row=3, column=0)
         post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
+        self.tweet.grid(row=1, column=1)
+        heading.grid(row=0, column=0, columnspan=2, sticky=W)
         post_tweet_button.grid (row=2, column=1, columnspan=1)
 
         self._root.grid_columnconfigure(1, weight=1)
         post_tweet_button.bind("<Button-1>", self.post_tweet)
+
+        self.tweet_service.return_tweets()
     
     
-    def post_tweet(self, event=None):
+    def post_tweet(self,event):
         tweet = self.tweet.get()
-
-        print("this is the tweet:", tweet)
+        self.tweet_service.create_tweet(1,self.username, time.time(), tweet,  "picture_url", "picture textfield text")
       
-
-    
+        
     def return_users(self):
         for i in self.users:
             print(i)

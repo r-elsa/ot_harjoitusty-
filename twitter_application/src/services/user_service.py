@@ -11,12 +11,21 @@ class UserService:
         # check if user exists (username already exists)
 
     
-
     def return_users(self):
         for i in self.users:
             print(i.name, i.username, i.password)
 
     def login(self, username=None, password=None):
+        user = None
+        for i in self.users:
+            if i.username == username:
+                if i.password == password:
+                    user = i
+            
+        
+        return user
+                    
+        
         # check if username and password match
 
         # if match --> create user
