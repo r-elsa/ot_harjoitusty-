@@ -5,6 +5,7 @@ from ui.ui import UI
 
 def main():
     window = Tk()
+    window.geometry("900x700")
     window.title("Twitter app")
     ui_view = UI(window)
     ui_view.start()

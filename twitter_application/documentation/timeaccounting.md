@@ -6,5 +6,7 @@
 | 29.3 |  3    | added all entities (user, tweet, comment, like and follow), UI service for handling rlogin and register. Updated README.md.  |
 |  4.4 |  2    | added tests and test coverage.  |
 | 14.4 |  2    | added pylint  |
+| 17.4 |  2    | added functionality   |
+
 Total:  10
 

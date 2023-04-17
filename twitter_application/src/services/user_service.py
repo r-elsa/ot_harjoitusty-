@@ -1,16 +1,16 @@
 from entities.user import User
 
-
 class UserService:
     def __init__(self, id=None):
         self.id = id
         self.users = []
 
     def create_user(self, name, username, password):
+              
         self.users.append(User(name, username, password, None, False))
         # check if user exists (username already exists)
 
-        # if username not exists --> create user
+    
 
     def return_users(self):
         for i in self.users:
@@ -25,3 +25,6 @@ class UserService:
             raise InvalidCredentialsError("Invalid username or password")
         self._user = user
         return user """
+    
+    def check_if_user_already_exists():
+        pass
