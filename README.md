@@ -27,5 +27,5 @@
 
 ### *Viikko 4*
 
-[Harjoitustyö](https://github.com/r-elsa/twitter_app/)
+[Harjoitustyö](https://github.com/r-elsa/ot_harjoitustyo/tree/master/twitter_application)
 
