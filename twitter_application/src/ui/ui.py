@@ -27,11 +27,6 @@ class UI:
         password = self.password.get()
 
         self.user_service.create_user(name, username, password)
-        """ self.user_service.create_user("Elsa", "elsauser", "elsapwd")
-        self.user_service.create_user("Maija", "maijauser", "maijapwd")
-        self.user_service.create_user("Lia", "liauser", "liapwd")
-        self.user_service.create_user("Anna", "annauser", "annapwd")
-        self.user_service.create_user("Veera", "veerauser", "verapwd") """
         self.user_service.return_users()
 
         self.username= username
@@ -43,11 +38,6 @@ class UI:
         password = self.password.get()
 
         instance = UserService()
-        """ instance.create_user("Elsa", "elsauser", "elsapwd")
-        instance.create_user("Maija", "maijauser", "maijapwd")
-        instance.create_user("Lia", "liauser", "liapwd")
-        instance.create_user("Anna", "annauser", "annapwd")
-        instance.create_user("Veera", "veerauser", "verapwd") """
         instance.login(username, password)
         self.username= username
         self.show_dashboard()
