@@ -6,6 +6,6 @@ from entities.tweet import Tweet
 class LikeService:
     def __init__(self, id):
         self.id = id
-
-    def like(Tweet):
-        pass
+        
+    def like(self,tweet_id):
+        print(tweet_id)

@@ -1,7 +1,10 @@
 from tkinter import Tk, ttk, W
+from tkinter import *
 from services.user_service import UserService
 from services.tweet_service import TweetService
+from services.like_service import LikeService
 import time
+import uuid
 
 class UI:
     def __init__(self, root):
@@ -10,6 +13,7 @@ class UI:
         self.username = None
         self.tweet_service= TweetService()
         self.user_service =  UserService()
+        self.like_service = LikeService()
     
 
     def hide_current_view(self):
@@ -23,11 +27,11 @@ class UI:
         password = self.password.get()
 
         self.user_service.create_user(name, username, password)
-        self.user_service.create_user("Elsa", "elsauser", "elsapwd")
+        """ self.user_service.create_user("Elsa", "elsauser", "elsapwd")
         self.user_service.create_user("Maija", "maijauser", "maijapwd")
         self.user_service.create_user("Lia", "liauser", "liapwd")
         self.user_service.create_user("Anna", "annauser", "annapwd")
-        self.user_service.create_user("Veera", "veerauser", "verapwd")
+        self.user_service.create_user("Veera", "veerauser", "verapwd") """
         self.user_service.return_users()
 
         self.username= username
@@ -39,13 +43,12 @@ class UI:
         password = self.password.get()
 
         instance = UserService()
-        instance.create_user("Elsa", "elsauser", "elsapwd")
+        """ instance.create_user("Elsa", "elsauser", "elsapwd")
         instance.create_user("Maija", "maijauser", "maijapwd")
         instance.create_user("Lia", "liauser", "liapwd")
         instance.create_user("Anna", "annauser", "annapwd")
-        instance.create_user("Veera", "veerauser", "verapwd")
+        instance.create_user("Veera", "veerauser", "verapwd") """
         instance.login(username, password)
-        instance.return_users()
         self.username= username
         self.show_dashboard()
     
@@ -60,8 +63,7 @@ class UI:
 
         password = ttk.Label(master=self._root, text="Password")
         self.password = ttk.Entry(master=self._root)
-
-      
+  
         login_button = ttk.Button(master=self._root, text="LOGIN")
         register_button = ttk.Button(master=self._root, text="REGISTER")
         heading.grid(row=0, column=0, columnspan=2, sticky=W)
@@ -114,45 +116,48 @@ class UI:
         
         register_button.grid(row=7, column=1, columnspan=1)
 
-
         self._root.grid_columnconfigure(1, weight=1)
         login_button.bind("<Button-1>", self.show_login_page)
         register_button.bind("<Button-1>", self.handle_register)
     
 
     def show_dashboard(self):
-     
         self.hide_current_view()
         heading = ttk.Label(master=self._root, text="Dashboard",
                             foreground="white",  background="black")
-     
-        tweet = ttk.Label(master=self._root, text="Tweet")
+      
         self.tweet = ttk.Entry(master=self._root)
      
-        tweet.grid(row=3, column=0)
         post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
         self.tweet.grid(row=1, column=1)
         heading.grid(row=0, column=0, columnspan=2, sticky=W)
-        post_tweet_button.grid (row=2, column=1, columnspan=1)
+        post_tweet_button.grid (row=1, column=2, columnspan=1)
 
         self._root.grid_columnconfigure(1, weight=1)
         post_tweet_button.bind("<Button-1>", self.post_tweet)
-
         self.tweet_service.return_tweets()
     
     
     def post_tweet(self,event):
         tweet = self.tweet.get()
-        self.tweet_service.create_tweet(1,self.username, time.time(), tweet,  "picture_url", "picture textfield text")
-      
-        
-    def return_users(self):
-        for i in self.users:
-            print(i)
+        self.tweet_service.create_tweet(uuid.uuid4(), self.username, time.time(), tweet,  "picture_url", "picture textfield text") 
+        self.display_tweets()
     
+       
+    def display_tweets(self):
+        tweets = self.tweet_service.return_tweets()
+      
+        for i in range(0,len(tweets)):
+            var = StringVar()
+            var.set(tweets[i].message)
+            label = Label(master=self._root, textvariable = var )
+            label.grid(row=3+i*2, column=0)
+            likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i].id}": self.like_service.like(t))
+            likebutton.grid(row=3+i*2, column=1)
     
     def start(self):
         self.show_login_page()
+        self.display_tweets()
 
 
 

@@ -7,8 +7,10 @@ class TestUserService(unittest.TestCase):
     def setUp(self):
         print("Set up goes here")
 
-    def user_registered(self):
+    def test_user_registered(self):
         user = UserService()
-        user.create_user(self, "testname", "testusername", "testpwd123p2")
-        amount_of_users = amount_of_users()
+        user.create_user("testname", "testusername", "testpwd123p2")
+        amount_of_users = user.count_users()
         self.assertEqual(amount_of_users, 1)
+
+     
