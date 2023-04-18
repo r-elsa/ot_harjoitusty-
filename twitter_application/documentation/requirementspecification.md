@@ -12,10 +12,10 @@ The application has regular users. An admin user with increased rights will be a
 
 The application consists of four different views:
 
-- login view
-- signup view
-- wall
-- creation of new tweet
+- login view DONE
+- signup view DONE
+- wall DONE
+- creation of new tweet DONE
 
 ## Functionality offered by the basic version
 
@@ -31,8 +31,8 @@ The application consists of four different views:
 
 #### WALL OF TWEETS 
 - every user has their own 'wall' where their name and profile picture is shown. 
-- wall shows their own tweets and tweets from people that user follows.
-- user can add tweets.
+- wall shows their own tweets and tweets from people that user follows. DONE
+- user can add tweets. DONE
 - max 15 tweets are shown on the wall and tweets are ranked based on the newest tweet. 
 
 #### TWEET, COMMENTING & LIKING
@@ -44,7 +44,7 @@ The application consists of four different views:
 
 - user can comment on tweets on their own wall (in the comment field of each picture).
 - 5 newest comments are shown for each tweet.
-- user can like tweets on their wall. (by clicking like button by the tweet).
+- user can like tweets on their wall. (by clicking like button by the tweet). DONE
 - same user can only like tweet once. 
 
 
