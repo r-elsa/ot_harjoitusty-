@@ -3,6 +3,7 @@ from tkinter import *
 from services.user_service import UserService
 from services.tweet_service import TweetService
 from services.like_service import LikeService
+from services.comment_service import CommentService
 import time
 import uuid
 
@@ -14,6 +15,7 @@ class UI:
         self.tweet_service= TweetService()
         self.user_service =  UserService()
         self.like_service = LikeService()
+        self.comment_service = CommentService()
     
 
     def hide_current_view(self):
@@ -117,6 +119,9 @@ class UI:
                             foreground="white",  background="black")
       
         self.tweet = ttk.Entry(master=self._root)
+
+
+       
      
         post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
         self.tweet.grid(row=1, column=1)
@@ -130,7 +135,7 @@ class UI:
     
     def post_tweet(self,event):
         tweet = self.tweet.get()
-        self.tweet_service.create_tweet(uuid.uuid4(), self.username, time.time(), tweet,  "picture_url", "picture textfield text") 
+        self.tweet_service.create_tweet(uuid.uuid4(), self.username, time.time(), tweet,  "picture_url") 
         self.display_tweets()
     
        
@@ -138,12 +143,26 @@ class UI:
         tweets = self.tweet_service.return_tweets()
       
         for i in range(0,len(tweets)):
-            var = StringVar()
-            var.set(tweets[i].message)
-            label = Label(master=self._root, textvariable = var )
-            label.grid(row=3+i*2, column=0)
+            message = StringVar()
+            message.set(tweets[i].message)
+            user = StringVar()
+            user.set(tweets[i].user)
+            picture_url = StringVar()
+            picture_url.set(tweets[i].picture_url)
+        
+            user_label = Label(master=self._root, textvariable = user )
+            user_label.grid(row=3+i*2, column=0)
+
+            picture_url_label = Label(master=self._root, textvariable = picture_url )
+            picture_url_label.grid(row=3+i*2, column=1)
+
+            message_label = Label(master=self._root, textvariable = message )
+            message_label.grid(row=3+i*2, column=2)
             likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i].id}": self.like_service.like(t))
-            likebutton.grid(row=3+i*2, column=1)
+            likebutton.grid(row=3+i*2, column=3)
+
+            view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i].id}": self.comment_service.comment(t))
+            view_comments.grid(row=3+i*2, column=4)
     
     def start(self):
         self.show_login_page()

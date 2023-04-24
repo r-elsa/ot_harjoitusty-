@@ -9,6 +9,7 @@ class LikeService:
 
     def like(self,tweet_id):
         new_like = Like(uuid.uuid4(),"userid", tweet_id, time.time())
+        print(tweet_id)
         self.likes.append(new_like)
 
     def return_likes(self):
