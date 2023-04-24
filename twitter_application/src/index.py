@@ -2,8 +2,11 @@
 from tkinter import Tk
 from ui.ui import UI
 
+from initialize_db import initialize_database
+
 
 def main():
+    initialize_database()
     window = Tk()
     window.geometry("900x700")
     window.title("Twitter app")
