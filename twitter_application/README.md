@@ -12,7 +12,7 @@ Technologies: python, TKInter and SQLite
 - [Testing of application](./documentation/testing.md)
 - [Time accounting](./documentation/timeaccounting.md)
 - [Changelog](./documentation/changelog.md)
-
+- [Newest release](./documentation/changelog.md)
 
 ## Installation
 
