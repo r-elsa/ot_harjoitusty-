@@ -25,9 +25,7 @@
 
 ## Sequence diagram 
 
-### Todon luominen
-
-Creation of a tweet after pushing the "Post tweet"-button:
+### Creation of Tweet
 
 ```mermaid
 sequenceDiagram
