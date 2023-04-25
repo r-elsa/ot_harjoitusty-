@@ -8,6 +8,8 @@
 | 14.4 |  2    | added pylint|
 | 17.4 |  2    | added functionality of creation of tweets |
 | 18.4 |  4    | added functionality of displaying tweets and likes, increased test coverage to 26%, improved style |
+| 24.4 |  4    | added functionality of displaying tweet information and added database (not configured yet)|
+| 25.4 |  4    | improved style based on pylint, updated github release  |
 
-Total:  14
+Total:  24
 
