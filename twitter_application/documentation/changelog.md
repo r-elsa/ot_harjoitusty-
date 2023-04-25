@@ -14,3 +14,12 @@ Following functionality has been added:
 - User can see tweets created
 - User can like tweets
 -Tests for tweet creation and likes
+
+### Week 5
+Following functionality has been added:
+- Button to commment on a tweet
+- More information of a tweet displayed
+
+-Database connection, not configured yet though.
+
+
