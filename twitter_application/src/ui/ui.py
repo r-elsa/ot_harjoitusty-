@@ -8,7 +8,14 @@ import time
 import uuid
 
 class UI:
+    """_summary_
+    """
     def __init__(self, root):
+        """_summary_
+
+        Args:
+            root (_type_): _description_
+        """
         self._root = root
         self._current_view = None
         self.username = None
@@ -19,11 +26,18 @@ class UI:
     
 
     def hide_current_view(self):
+        """_summary_
+        """
         list = self._root.grid_slaves()
         for l in list:
             l.destroy()
 
-    def handle_register(self, event=None):   
+    def handle_register(self, event=None):
+        """_summary_
+
+        Args:
+            event (_type_, optional): _description_. Defaults to None.
+        """         
         name = self.name.get()
         username = self.username.get()
         password = self.password.get()
@@ -36,6 +50,11 @@ class UI:
 
     
     def handle_login(self, event=None):
+        """_summary_
+
+        Args:
+            event (_type_, optional): _description_. Defaults to None.
+        """        
         username = self.username.get()
         password = self.password.get()
 
@@ -46,6 +65,11 @@ class UI:
     
     
     def show_login_page(self, event=None):
+        """_summary_
+
+        Args:
+            event (_type_, optional): _description_. Defaults to None.
+        """        
         self.hide_current_view()
         heading = ttk.Label(master=self._root, text="Login",
                             foreground="white",  background="black")
@@ -76,6 +100,11 @@ class UI:
 
 
     def show_register_page(self, event = None):
+        """_summary_
+
+        Args:
+            event (_type_, optional): _description_. Defaults to None.
+        """        
         self.hide_current_view()
         heading = ttk.Label(master=self._root, text="Register",
                             foreground="white",  background="black")
@@ -114,6 +143,8 @@ class UI:
     
 
     def show_dashboard(self):
+        """_summary_
+        """        
         self.hide_current_view()
         heading = ttk.Label(master=self._root, text="Dashboard",
                             foreground="white",  background="black")
@@ -134,12 +165,19 @@ class UI:
     
     
     def post_tweet(self,event):
+        """_summary_
+
+        Args:
+            event (_type_): _description_
+        """        
         tweet = self.tweet.get()
         self.tweet_service.create_tweet(uuid.uuid4(), self.username, time.time(), tweet,  "picture_url") 
         self.display_tweets()
     
        
     def display_tweets(self):
+        """_summary_
+        """        
         tweets = self.tweet_service.return_tweets()
       
         for i in range(0,len(tweets)):
@@ -165,6 +203,8 @@ class UI:
             view_comments.grid(row=3+i*2, column=4)
     
     def start(self):
+        """ Initializing function.
+        """        
         self.show_login_page()
         self.display_tweets()
 

@@ -8,6 +8,6 @@
 | 14.4 |  2    | added pylint|
 | 17.4 |  2    | added functionality of creation of tweets |
 | 18.4 |  4    | added functionality of displaying tweets and likes, increased test coverage to 26%, improved style |
-
-Total:  14
+| 2.5  |  2    | added docstring-documentation and improved some other documentation|
+Total:  16
 

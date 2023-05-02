@@ -6,6 +6,8 @@ from initialize_db import initialize_database
 
 
 def main():
+    """Main function which initialized tkinter and database.
+    """    
     initialize_database()
     window = Tk()
     window.geometry("900x700")
