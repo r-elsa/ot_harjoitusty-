@@ -37,12 +37,12 @@ The application consists of four different views:
 
 #### TWEET, COMMENTING & LIKING
 - each tweet shows the following information:
-1) name of sender
-2) time of tweet sending
-3) message of tweet
-4) possibily a picture and a text field (optional)
+1) name of sender DONE
+2) time of tweet sending DONE
+3) message of tweet DONE
+4) possibily a picture and a text field (optional) DONE
 
-- user can comment on tweets on their own wall (in the comment field of each picture).
+- user can comment on tweets on their own wall (in the comment field of each picture). DONE
 - 5 newest comments are shown for each tweet.
 - user can like tweets on their wall. (by clicking like button by the tweet). DONE
 - same user can only like tweet once. 

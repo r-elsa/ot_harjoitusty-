@@ -16,4 +16,14 @@ Following functionality has been added:
 -Tests for tweet creation and likes
 
 ### Week 5
+<<<<<<< HEAD
 -Docstrings added
+=======
+Following functionality has been added:
+- Button to commment on a tweet
+- More information of a tweet displayed
+
+-Database connection, not configured yet though.
+
+
+>>>>>>> 3e5493bf967897ce680b1abd59eb3cea510b8b20

@@ -12,7 +12,7 @@ Technologies: python, TKInter and SQLite
 - [Testing of application](./documentation/testing.md)
 - [Time accounting](./documentation/timeaccounting.md)
 - [Changelog](./documentation/changelog.md)
-
+- [Newest release](https://github.com/r-elsa/ot_harjoitustyo/releases/tag/week_5)
 
 ## Installation
 
