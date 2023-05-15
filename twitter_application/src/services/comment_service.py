@@ -10,11 +10,13 @@ class CommentService:
         id: id of CommentService.
         comments: Comments of Tweets.
     """
+    
     def __init__(self):
         """ The constructor of the class, which creates a new instance of CommentService.
         """         
         self.id = uuid.uuid4
         self.comments = []
+        self.connection = "frsegres"
 
     def comment(self,tweet_id):
         """ Function to add a comment.
@@ -23,6 +25,15 @@ class CommentService:
             tweet_id (int): Id of the tweet to which the comment belongs.
         """        
         new_comment = Comment(uuid.uuid4(),"userid", tweet_id, time.time(), "message")
+
+        cursor = self.connection.cursor()
+        cursor.execute(
+            "insert into comment (id, user_id, tweet_id, send_time, message) values (?, ?, ?, ?, ?)",
+
+            (new_comment.id,new_comment.user_id, new_comment.tweet_id, new_comment.send_time, new_comment.message)
+        )
+
+        self.connection.commit()
         self.comments.append(new_comment)
 
     def return_comments(self):

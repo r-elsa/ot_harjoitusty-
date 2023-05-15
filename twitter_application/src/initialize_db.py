@@ -13,7 +13,7 @@ def drop_tables(connection):
     ''')
 
     cursor.execute('''
-            drop table if exists likes;
+            drop table if exists like;
     ''')
 
     cursor.execute('''

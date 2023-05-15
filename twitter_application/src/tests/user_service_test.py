@@ -7,7 +7,6 @@ from services.comment_service import CommentService
 import time
 
 
-
 class TestUserService(unittest.TestCase):   
     def setUp(self):
         print("Set up goes here")
