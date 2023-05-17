@@ -1,6 +1,6 @@
 import uuid
 from entities.tweet import Tweet
-import time
+from db_connection import get_db_connection
 
 class TweetService:
     """ Class, which adds and returns tweets.
@@ -10,7 +10,7 @@ class TweetService:
         tweets (array): Array of Tweets.
       
     """  
-    def __init__(self):
+    def __init__(self, connection):
         """ The contructor of the class TweetService
 
         Args:
@@ -18,9 +18,8 @@ class TweetService:
             tweets (array): Array of Tweets.
             
         """  
-        self.id = uuid.uuid4
         self.tweets = []
-        self.connection = "grg"
+        self.connection = connection
 
     def create_tweet(self, id, user_id, send_time, message, picture_url):
         """ Post a new tweet
@@ -38,10 +37,11 @@ class TweetService:
         
         cursor = self.connection.cursor()
         cursor.execute(
-            "insert into like (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            (new_tweet.id, new_tweet.user_id, new_tweet.send_time, new_tweet.message, new_tweet.picture_url)
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            (new_tweet.id, new_tweet.user_id, new_tweet.send_time, new_tweet.message, new_tweet.picture_url,)
         )
 
+            
         self.connection.commit()
 
         self.tweets.append(new_tweet)
@@ -53,3 +53,5 @@ class TweetService:
             array: Array of tweet - objects.
         """  
         return self.tweets
+
+tweet_service = TweetService(get_db_connection())

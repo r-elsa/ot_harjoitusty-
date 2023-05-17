@@ -4,6 +4,7 @@ from services.user_service import UserService
 from services.tweet_service import TweetService
 from services.like_service import LikeService
 from services.comment_service import CommentService
+from db_connection import get_db_connection
 import time
 import uuid
 
@@ -19,10 +20,10 @@ class UI:
         self._root = root
         self._current_view = None
         self.username = None
-        self.tweet_service= TweetService()
-        self.user_service =  UserService()
-        self.like_service = LikeService()
-        self.comment_service = CommentService()
+        self.tweet_service= TweetService(get_db_connection())
+        self.user_service =  UserService(get_db_connection)
+        self.like_service = LikeService(get_db_connection())
+        self.comment_service = CommentService(get_db_connection())
     
 
     def hide_current_view(self):
@@ -58,7 +59,7 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
-        instance = UserService()
+        instance = UserService(get_db_connection())
         instance.login(username, password)
         self.username= username
         self.show_dashboard()
@@ -171,7 +172,12 @@ class UI:
             event (_type_): _description_
         """        
         tweet = self.tweet.get()
-        self.tweet_service.create_tweet(uuid.uuid4(), self.username, time.time(), tweet,  "picture_url") 
+        self.tweet_service.create_tweet(str(uuid.uuid4()),str(uuid.uuid4()), time.time(), tweet,  "picture_url") 
+
+
+
+
+
         self.display_tweets()
     
        
@@ -184,7 +190,7 @@ class UI:
             message = StringVar()
             message.set(tweets[i].message)
             user = StringVar()
-            user.set(tweets[i].user)
+            user.set(tweets[i].user_id)
             picture_url = StringVar()
             picture_url.set(tweets[i].picture_url)
         

@@ -1,5 +1,9 @@
 import uuid
 from entities.user import User
+from db_connection import get_db_connection
+
+
+
 
 class UserService:
     """ Class, which adds and returns users.
@@ -9,7 +13,7 @@ class UserService:
         users (array): Array of Users.
       
     """     
-    def __init__(self):
+    def __init__(self, connection):
         """ The contructor of the class UserService
 
         Args:
@@ -42,13 +46,7 @@ class UserService:
 
         self.connection.commit()
 
-
-
-
-
-
-
-        self.users.append(User(name, username, password, None, False))
+        self.users.append(User(id, name, username, password, None, False))
 
     def return_users(self):
         """
@@ -82,3 +80,5 @@ class UserService:
                 if i.password == password:
                     user = i
         return user
+
+user_service = UserService(get_db_connection())

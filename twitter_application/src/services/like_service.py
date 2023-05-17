@@ -1,6 +1,7 @@
 import uuid
 import time
 from entities.like import Like
+from db_connection import get_db_connection
 
 class LikeService:
     """ Class, which adds and returns likes.
@@ -11,7 +12,7 @@ class LikeService:
       
     """  
     
-    def __init__(self):
+    def __init__(self, connection):
         """ The contructor of the class LikeService
 
         Args:
@@ -19,9 +20,8 @@ class LikeService:
             likes(array): Array of Likes.
             
         """  
-        self.id = uuid.uuid4
         self.likes = []
-        self.connection = "fgdzg"
+        self.connection = connection
 
     def like(self,tweet_id):
         """ Add a like
@@ -29,7 +29,7 @@ class LikeService:
         Args:
             tweet_id (int): Id of the tweet that is being liked. 
         """        
-        new_like = Like(uuid.uuid4(),"userid", tweet_id, time.time())
+        new_like = Like(str(uuid.uuid4()),"userid", tweet_id, time.time())
         
         cursor = self.connection.cursor()
         cursor.execute(
@@ -38,15 +38,9 @@ class LikeService:
         )
 
         self.connection.commit()
-
         self.likes.append(new_like)
-
         return True
 
-            
-       
-        
-       
 
     def return_likes(self):
         """ Return all likes.
@@ -55,3 +49,6 @@ class LikeService:
             array: Array of like - objects.
         """        
         return self.likes
+    
+
+like_service = LikeService(get_db_connection())    

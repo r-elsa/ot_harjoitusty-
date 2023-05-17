@@ -1,4 +1,4 @@
-from db_connection import get_database_connection
+from db_connection import get_db_connection
 
 
 def drop_tables(connection):
@@ -32,7 +32,7 @@ def create_tables(connection):
 
     cursor.execute('''
         create table user (
-            id int primary key,
+            id text primary key,
             name text,
             username text,
             password text,           
@@ -44,8 +44,8 @@ def create_tables(connection):
     
     cursor.execute('''    
         create table tweet (
-            id int primary key,
-            user_id int,
+            id text primary key,
+            user_id text,
             send_time time,
             message text,
             picture_url text
@@ -55,9 +55,9 @@ def create_tables(connection):
     
     cursor.execute(''' 
         create table like (
-            id int primary key,
-            user_id int,
-            tweet_id int,
+            id text primary key,
+            user_id text,
+            tweet_id text,
             send_time time
         );      
     ''')
@@ -65,9 +65,9 @@ def create_tables(connection):
     
     cursor.execute('''
         create table comment (
-            id int primary key,
-            user_id int,
-            tweet_id int,
+            id text primary key,
+            user_id text,
+            tweet_id text,
             send_time time,
             message text    
         );       
@@ -75,10 +75,11 @@ def create_tables(connection):
 
     
     cursor.execute('''
+
         create table follow (
-        id int primary key,
-        follower int,
-        following int,
+        id string primary key,
+        follower string,
+        following string,
         send_time time
         );
        
@@ -88,7 +89,7 @@ def create_tables(connection):
 
 
 def initialize_database():
-    connection = get_database_connection()
+    connection = get_db_connection()
 
     drop_tables(connection)
     create_tables(connection)
