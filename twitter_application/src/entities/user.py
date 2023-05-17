@@ -9,7 +9,7 @@ class User:
         send_time (_type_, optional): _description_. Defaults to None.
         message (_type_, optional): _description_. Defaults to None.
     """  
-    def __init__(self, name, username, password, profile_picture=None, admin=False):
+    def __init__(self, id, name, username, password, profile_picture=None, admin=False):
         """_summary_
 
         Args:
@@ -19,6 +19,7 @@ class User:
             send_time (_type_, optional): _description_. Defaults to None.
             message (_type_, optional): _description_. Defaults to None.
         """  
+        self.id = id
         self.name = name
         self.username = username
         self.password = password

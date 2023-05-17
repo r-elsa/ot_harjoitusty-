@@ -21,14 +21,33 @@ class UserService:
         self.id = uuid.uuid4
         self.users = []
 
-    def create_user(self, name, username, password):
+    def create_user(self, id, name, username, password, profile_picture, admin):
         """ Create a new user.
 
         Args:
             name (string): name of user
             username (string): username of user
             password (string): password
-        """        
+        """
+
+    
+
+        new_user = User(id,name, username, password, profile_picture, admin)
+        
+        cursor = self.connection.cursor()
+        cursor.execute(
+            "insert into user (id, name, username, password, profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
+            (new_user.id, new_user.name, new_user.username, new_user.password, new_user.profile_picture, new_user.admin)
+        )
+
+        self.connection.commit()
+
+
+
+
+
+
+
         self.users.append(User(name, username, password, None, False))
 
     def return_users(self):

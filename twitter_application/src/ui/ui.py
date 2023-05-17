@@ -42,7 +42,7 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
-        self.user_service.create_user(name, username, password)
+        self.user_service.create_user(name, username, password, "url", False)
         self.user_service.return_users()
 
         self.username= username
