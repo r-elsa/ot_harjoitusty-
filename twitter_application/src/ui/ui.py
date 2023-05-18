@@ -24,37 +24,20 @@ class UI:
         self.user_service =  UserService(get_db_connection)
         self.like_service = LikeService(get_db_connection())
         self.comment_service = CommentService(get_db_connection())
-          
+  
+    
+    from .dashboard_ui import show_dashboard,post_tweet, display_tweets
+    from .register_ui import handle_register, show_register_page
 
+
+          
     def hide_current_view(self):
         """_summary_
         """
         list = self._root.grid_slaves()
         for l in list:
             l.destroy()
-
-    def handle_register(self, event=None):
-        """_summary_
-
-        Args:
-            event (_type_, optional): _description_. Defaults to None.
-        """         
-        name = self.name.get()
-        username = self.username.get()
-        password = self.password.get()
-
-     
-
-        self.user_service.create_user(str(uuid.uuid4),name, username, password, "url", False)
-
     
-        self.user_service.return_users()
-
-        self.username= username
-        self.show_dashboard()
-
-
-      
 
     def handle_login(self, event=None):
         """_summary_
@@ -65,24 +48,22 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
-       
         instance = UserService(get_db_connection())
         """ instance.insert_fake_users() """
         
         """ else:
-    
+
             instance = UserService(get_db_connection()) """
-        
-        
+            
         successful_login = instance.login(username, password) 
 
         if successful_login:
             self.show_dashboard()
             self.display_tweets()
             self.username= username
-           
-    
-    
+            
+
+
     def show_login_page(self, event=None):
         """_summary_
 
@@ -98,7 +79,7 @@ class UI:
 
         password = ttk.Label(master=self._root, text="Password")
         self.password = ttk.Entry(master=self._root)
-  
+
         login_button = ttk.Button(master=self._root, text="LOGIN")
         register_button = ttk.Button(master=self._root, text="REGISTER")
         heading.grid(row=0, column=0, columnspan=2, sticky=W)
@@ -111,125 +92,17 @@ class UI:
         login_button.grid (row=7, column=1, columnspan=1)
 
         register_button.grid(row=7, column=0, columnspan=1)
- 
+
         self._root.grid_columnconfigure(1, weight=1)
         register_button.bind("<Button-1>", self.show_register_page)
         login_button.bind("<Button-1>", self.handle_login)
-    
 
-
-    def show_register_page(self, event = None):
-        """_summary_
-
-        Args:
-            event (_type_, optional): _description_. Defaults to None.
-        """        
-        self.hide_current_view()
-        heading = ttk.Label(master=self._root, text="Register",
-                            foreground="white",  background="black")
-
-        name = ttk.Label(master=self._root, text="Name")
-        self.name = ttk.Entry(master=self._root)
-
-        username = ttk.Label(master=self._root, text="Username")
-        self.username = ttk.Entry(master=self._root)
-
-        password = ttk.Label(master=self._root, text="Password")
-        self.password = ttk.Entry(master=self._root)
-
-        register_button = ttk.Button(master=self._root, text="REGISTER")
-
-        login_button = ttk.Button(master=self._root, text="LOGIN")
-
-        heading.grid(row=0, column=0, columnspan=2, sticky=W)
-
-        name.grid(row=1, column=0)
-        self.name.grid(row=1, column=1)
-
-        username.grid(row=3, column=0)
-        self.username.grid(row=3, column=1)
-
-        password.grid(row=5, column=0)
-        self.password.grid(row=5, column=1)
-
-        login_button.grid (row=7, column=0, columnspan=1)
-        
-        register_button.grid(row=7, column=1, columnspan=1)
-
-        self._root.grid_columnconfigure(1, weight=1)
-        login_button.bind("<Button-1>", self.show_login_page)
-        register_button.bind("<Button-1>", self.handle_register)
-    
-
-    def show_dashboard(self):
-        """_summary_
-        """        
-        self.hide_current_view()
-        heading = ttk.Label(master=self._root, text="Dashboard",
-                            foreground="white",  background="black")
       
-        self.tweet = ttk.Entry(master=self._root)
-     
-        post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
-        self.tweet.grid(row=1, column=1)
-        heading.grid(row=0, column=0, columnspan=2, sticky=W)
-        post_tweet_button.grid (row=1, column=2, columnspan=1)
-
-        self._root.grid_columnconfigure(1, weight=1)
-        post_tweet_button.bind("<Button-1>", self.post_tweet)
-        self.tweet_service.return_tweets()
-    
-    
-    def post_tweet(self,event):
-        """_summary_
-
-        Args:
-            event (_type_): _description_
-        """        
-        tweet = self.tweet.get()
-        self.tweet_service.create_tweet(str(uuid.uuid4()),str(uuid.uuid4()), time.time(), tweet,  "picture_url") 
-
-
-
-        self.display_tweets()
-    
-       
-    def display_tweets(self):
-        """_summary_
-        """        
-        tweets = self.tweet_service.return_tweets()
-        for i in tweets:
-            print(i)
-      
-        for i in range(0,len(tweets)):
-            message = StringVar()
-            message.set(tweets[i].message)
-            user = StringVar()
-            user.set(tweets[i].user_id)
-            picture_url = StringVar()
-            picture_url.set(tweets[i].picture_url)
-        
-            user_label = Label(master=self._root, textvariable = user )
-            user_label.grid(row=3+i*2, column=0)
-
-            picture_url_label = Label(master=self._root, textvariable = picture_url )
-            picture_url_label.grid(row=3+i*2, column=1)
-
-            message_label = Label(master=self._root, textvariable = message )
-            message_label.grid(row=3+i*2, column=2)
-            likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i].id}": self.like_service.like(t))
-            likebutton.grid(row=3+i*2, column=3)
-
-            view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i].id}": self.comment_service.comment(t))
-            view_comments.grid(row=3+i*2, column=4)
-    
-
-    
     def start(self):
         """ Initializing function.
-        """        
+        """  
         self.show_login_page()
-      
+
 
 
 
