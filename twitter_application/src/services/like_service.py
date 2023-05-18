@@ -3,6 +3,9 @@ import time
 from entities.like import Like
 from db_connection import get_db_connection
 
+def get_like_by_row(row):
+        return Like(row[0],row[1], row[2], row[3]) if row else None
+
 class LikeService:
     """ Class, which adds and returns likes.
 
@@ -20,7 +23,6 @@ class LikeService:
             likes(array): Array of Likes.
             
         """  
-        self.likes = []
         self.connection = connection
 
     def like(self,tweet_id):
@@ -38,8 +40,10 @@ class LikeService:
         )
 
         self.connection.commit()
-        self.likes.append(new_like)
         return True
+
+    
+
 
 
     def return_likes(self):
@@ -47,8 +51,11 @@ class LikeService:
 
         Returns:
             array: Array of like - objects.
-        """        
-        return self.likes
-    
+        """  
+        cursor = self.connection.cursor()
+        cursor.execute("select * from like")
+        rows = cursor.fetchall()
+        return list(map(get_like_by_row, rows))
+      
 
 like_service = LikeService(get_db_connection())    

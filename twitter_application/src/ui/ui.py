@@ -24,7 +24,7 @@ class UI:
         self.user_service =  UserService(get_db_connection)
         self.like_service = LikeService(get_db_connection())
         self.comment_service = CommentService(get_db_connection())
-    
+          
 
     def hide_current_view(self):
         """_summary_
@@ -43,13 +43,19 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
-        self.user_service.create_user(name, username, password, "url", False)
+     
+
+        self.user_service.create_user(str(uuid.uuid4),name, username, password, "url", False)
+
+    
         self.user_service.return_users()
 
         self.username= username
         self.show_dashboard()
 
-    
+
+      
+
     def handle_login(self, event=None):
         """_summary_
 
@@ -59,10 +65,22 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
+       
         instance = UserService(get_db_connection())
-        instance.login(username, password)
-        self.username= username
-        self.show_dashboard()
+        """ instance.insert_fake_users() """
+        
+        """ else:
+    
+            instance = UserService(get_db_connection()) """
+        
+        
+        successful_login = instance.login(username, password) 
+
+        if successful_login:
+            self.show_dashboard()
+            self.display_tweets()
+            self.username= username
+           
     
     
     def show_login_page(self, event=None):
@@ -151,9 +169,6 @@ class UI:
                             foreground="white",  background="black")
       
         self.tweet = ttk.Entry(master=self._root)
-
-
-       
      
         post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
         self.tweet.grid(row=1, column=1)
@@ -176,8 +191,6 @@ class UI:
 
 
 
-
-
         self.display_tweets()
     
        
@@ -185,6 +198,8 @@ class UI:
         """_summary_
         """        
         tweets = self.tweet_service.return_tweets()
+        for i in tweets:
+            print(i)
       
         for i in range(0,len(tweets)):
             message = StringVar()
@@ -208,11 +223,13 @@ class UI:
             view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i].id}": self.comment_service.comment(t))
             view_comments.grid(row=3+i*2, column=4)
     
+
+    
     def start(self):
         """ Initializing function.
         """        
         self.show_login_page()
-        self.display_tweets()
+      
 
 
 

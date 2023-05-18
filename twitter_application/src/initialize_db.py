@@ -1,5 +1,5 @@
 from db_connection import get_db_connection
-
+import time
 
 def drop_tables(connection):
     cursor = connection.cursor()
@@ -88,12 +88,75 @@ def create_tables(connection):
     connection.commit()
 
 
+def insert_testdata(connection):
+    cursor = connection.cursor()
+
+      
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user1', 'Chelsea Yu', '@chelseayu', 'chelseayu', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user2', 'Laura Mccarthy', '@lauramccarthy', 'lauramccarthy', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user3', 'Dale Stokes', '@dalestokes', 'dalestokes', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user4', 'Kirk Medina', '@kirkmedina', 'kirkmedina', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user5', 'Vincent Perry', '@vincentperry', 'vincentperry', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user6', 'Brett Vargas', '@brettvargas', 'brettvargas', 'url', False )
+        )
+    
+    cursor.execute(
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            ('tweet1', 'user1', 'time.time()', 'We all enjoy thinking about the past because we miss memories.', 'url')
+        )
+    
+    cursor.execute(
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            ('tweet2', 'user2', 'time.time()', ' Imagine ads before dreams every night.', 'url')
+        )
+    
+    cursor.execute(
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            ('tweet3', 'user2', 'time.time()', 'I wish it was already possible for AI to create music right for my mood.', 'url')
+        )
+    
+    cursor.execute(
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            ('tweet4', 'user3', 'time.time()', 'what do you like?', 'url')
+        )
+    cursor.execute(
+            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+            ('tweet5', 'user3', 'time.time()', 'I just refuse to take a single bite of my food until I find something good to watch.', 'url')
+        )
+    
+   
+    connection.commit()
+
+
 def initialize_database():
     connection = get_db_connection()
 
     drop_tables(connection)
     create_tables(connection)
-
+    insert_testdata(connection)
+   
 
 if __name__ == "__main__":
     initialize_database()

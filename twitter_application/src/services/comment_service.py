@@ -3,6 +3,11 @@ import time
 from entities.comment import Comment
 from db_connection import get_db_connection
 
+
+    
+def get_comment_by_row(row):
+    return Comment(row[0],row[1], row[2], row[3], row[4]) if row else None
+
 class CommentService:
     """Class, which adds and returns comments.  
 
@@ -15,7 +20,6 @@ class CommentService:
         """ The constructor of the class, which creates a new instance of CommentService.
         """   
         self.connection = connection      
-        self.comments = []
 
     def comment(self,tweet_id):
         """ Function to add a comment.
@@ -33,14 +37,20 @@ class CommentService:
         )
 
         self.connection.commit()
-        self.comments.append(new_comment)
+
+    
 
     def return_comments(self):
         """ Function to return all comments. 
 
         Returns:
             array: comment - objects
-        """        
-        return self.comments
+        """  
+        cursor = self.connection.cursor()
+        cursor.execute("select * from comment")
+        rows = cursor.fetchall()
+        return list(map(self.get_comment_by_row, rows))
+
+   
 
 comment_service = CommentService(get_db_connection())
