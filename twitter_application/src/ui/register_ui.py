@@ -59,6 +59,26 @@ def show_register_page(self, event = None):
         self._root.grid_columnconfigure(1, weight=1)
         login_button.bind("<Button-1>", self.show_login_page)
         register_button.bind("<Button-1>", self.handle_register)
+
+     
+        """ left_side = ttk.Frame(master=self._root,)
+        right_side = ttk.Frame(master=self._root,)
+        left_side.grid(row=0, column=0)
+        right_side.grid(row=0, column=1)
+
+        entrybox = ttk.Entry(left_side)
+        listbox1 = ttk.Entry(left_side)
+        listbox2 = ttk.Entry(left_side)
+        listbox3 = ttk.Entry(left_side)
+        entrybox.grid(row=0, column=0)
+        listbox1.grid(row=2, column=0)
+        listbox2.grid(row=3, column=0)
+        listbox3.grid(row=4, column=0)
+
+        spinbox = ttk.Spinbox(right_side )
+
+        spinbox.grid(row=0, column=0) """
+
     
 
      

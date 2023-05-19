@@ -1,5 +1,6 @@
 from tkinter import Tk, ttk, W
 from tkinter import *
+from PIL import ImageTk, Image  
 from services.user_service import UserService
 from services.tweet_service import TweetService
 from services.like_service import LikeService
@@ -7,11 +8,8 @@ from services.comment_service import CommentService
 from db_connection import get_db_connection
 import time
 import uuid
-
-        
-        
-
-
+import os
+ 
 def show_dashboard(self):
     """_summary_
     """        
@@ -41,7 +39,6 @@ def post_tweet(self,event):
     self.tweet_service.create_tweet(str(uuid.uuid4()),str(uuid.uuid4()), time.time(), tweet,  "picture_url") 
 
 
-
     self.display_tweets()
 
     
@@ -49,25 +46,39 @@ def display_tweets(self):
     """_summary_
     """        
     tweets = self.tweet_service.return_tweets()
-      
+
+    img = Image.open(os.path.join(os.path.dirname(__file__), 'twitter_official.png'))
+    resized_image= img.resize((50,50), Image.ANTIALIAS)
+    new_image= ImageTk.PhotoImage(resized_image)
+    pic_label = ttk.Label(image=new_image)
+    pic_label.grid(row=3, column=1) 
+ 
+
+
     for i in range(0,len(tweets)):
         message = StringVar()
-        message.set(tweets[i].message)
+        message.set(tweets[i][0].message)
         user = StringVar()
-        user.set(tweets[i].user_id)
+        user.set(tweets[i][1])
+
         picture_url = StringVar()
-        picture_url.set(tweets[i].picture_url)
-    
+        picture_url.set(tweets[i][0].picture_url)
+
         user_label = Label(master=self._root, textvariable = user )
-        user_label.grid(row=3+i*2, column=2)
-
-        picture_url_label = Label(master=self._root, textvariable = picture_url )
-        picture_url_label.grid(row=3+i*2, column=2)
-
+        user_label.grid(row=303+i*2, column=0)
+      
+      
         message_label = Label(master=self._root, textvariable = message )
-        message_label.grid(row=3+i*2, column=2)
-        likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i].id}": self.like_service.like(t))
-        likebutton.grid(row=3+i*2, column=2)
+        message_label.grid(row=303+i*2, column=2)
+        likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i][0].id}": self.like_service.like(t, tweets[i][0].user_id))
+        likebutton.grid(row=303+i*2, column=3)
 
-        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i].id}": self.comment_service.comment(t))
-        view_comments.grid(row=3+i*2, column=2)
+        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i][0].id}": self.comment_service.comment(t,tweets[i][0].user_id))
+        view_comments.grid(row=303+i*2, column=4)
+
+
+        
+           
+
+           
+          

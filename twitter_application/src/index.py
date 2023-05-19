@@ -10,6 +10,7 @@ def main():
     """    
     initialize_database()
     window = Tk()
+    window.attributes('-fullscreen', True)
     window.geometry("900x700")
     window.title("Twitter app")
     ui_view = UI(window)

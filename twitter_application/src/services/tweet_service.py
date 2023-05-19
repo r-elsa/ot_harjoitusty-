@@ -4,7 +4,9 @@ from db_connection import get_db_connection
 
  
 def get_tweet_by_row(row):
-    return Tweet(row[0],row[1], row[2], row[3], row[4]) if row else None
+    return (Tweet(row[0],row[1], row[2], row[3], row[4]), row[5]) if row else None
+
+
 
 class TweetService:
     """ Class, which adds and returns tweets.
@@ -54,8 +56,13 @@ class TweetService:
             array: Array of tweet - objects.
         """  
         cursor = self.connection.cursor()
-        cursor.execute("select * from tweet")
+     
+        cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username from tweet LEFT JOIN user ON tweet.user_id = user.id")
+
+  
         rows = cursor.fetchall()
+    
+           
         return list(map(get_tweet_by_row, rows))
 
 tweet_service = TweetService(get_db_connection())

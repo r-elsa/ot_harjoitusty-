@@ -25,12 +25,13 @@ class LikeService:
         """  
         self.connection = connection
 
-    def like(self,tweet_id):
+    def like(self,tweet_id, user_id):
         """ Add a like
 
         Args:
             tweet_id (int): Id of the tweet that is being liked. 
-        """        
+        """ 
+        print(tweet_id, user_id)       
         new_like = Like(str(uuid.uuid4()),"userid", tweet_id, time.time())
         
         cursor = self.connection.cursor()
