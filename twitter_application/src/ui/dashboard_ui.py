@@ -27,7 +27,7 @@ def show_dashboard(self):
     self._root.grid_columnconfigure(1, weight=1)
     post_tweet_button.bind("<Button-1>", self.post_tweet)
     
-    self.tweet_service.return_tweets()
+    self.display_tweets()
 
 
 def post_tweet(self,event):
@@ -35,26 +35,29 @@ def post_tweet(self,event):
 
     Args:
         event (_type_): _description_
-    """        
+    """     
+    print("POST TWEET")   
     tweet = self.tweet.get()
-    print(self.userinstance)
-    self.tweet_service.create_tweet(str(uuid.uuid4()),self.userinstance.id, time.time(), tweet,  "picture_url") 
-    #self.display_tweets()
+    self.tweet_service.create_tweet(str(uuid.uuid4()),self.userinstance.id, time.time(), tweet,  "picture_url")    
+    self.show_dashboard()
+
+def like_button_clicked(self, tweet_id, user_id):
+    """_summary_
+    """   
+    self.like_service.like(tweet_id, user_id)
+    self.display_tweets()
 
     
 def display_tweets(self):
     """_summary_
     """  
-          
     tweets = self.tweet_service.return_tweets()
-
     img = Image.open(os.path.join(os.path.dirname(__file__), 'twitter_official.png'))
     resized_image= img.resize((50,50), Image.ANTIALIAS)
     new_image= ImageTk.PhotoImage(resized_image)
     pic_label = ttk.Label(image=new_image)
     pic_label.grid(row=3, column=1) 
  
-
 
     for i in range(0,len(tweets)):
         
@@ -70,23 +73,19 @@ def display_tweets(self):
         likes = StringVar()
         likes.set(f"{tweets[i][2]}")
 
-
         user_label = Label(master=self._root, textvariable = user )
         user_label.grid(row=303+i*2, column=0)
 
-    
         message_label = Label(master=self._root, textvariable = message )
         message_label.grid(row=303+i*2, column=1)
 
         like_label = Label(master=self._root, textvariable = likes )
         like_label.grid(row=303+i*2, column=2)
-
-       
-        
-        likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i][0].id}": self.like_service.like(t, tweets[i][0].user_id))
+ 
+        likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i][0].id}": self.like_button_clicked(t, self.userinstance.id))
         likebutton.grid(row=303+i*2, column=3)
 
-        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i][0].id}": self.comment_service.comment(t,tweets[i][0].user_id))
+        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i][0].id}": self.comment_service.comment(t,self.userinstance.id))
         view_comments.grid(row=303+i*2, column=4)
 
 

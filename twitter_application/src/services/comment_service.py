@@ -32,7 +32,6 @@ class CommentService:
         cursor = self.connection.cursor()
         cursor.execute(
             "insert into comment (id, user_id, tweet_id, send_time, message) values (?, ?, ?, ?, ?)",
-
             (new_comment.id,new_comment.user_id, new_comment.tweet_id, new_comment.send_time, new_comment.message,)
         )
 
@@ -52,5 +51,4 @@ class CommentService:
         return list(map(self.get_comment_by_row, rows))
 
    
-
 comment_service = CommentService(get_db_connection())

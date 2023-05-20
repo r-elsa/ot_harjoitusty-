@@ -1,9 +1,7 @@
 
 from tkinter import Tk
 from ui.ui import UI
-
 from initialize_db import initialize_database
-
 
 def main():
     """Main function which initialized tkinter and database.

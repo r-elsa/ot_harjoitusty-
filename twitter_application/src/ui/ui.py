@@ -26,11 +26,9 @@ class UI:
         self.comment_service = CommentService(get_db_connection())
   
     
-    from .dashboard_ui import show_dashboard,post_tweet, display_tweets
+    from .dashboard_ui import show_dashboard,post_tweet, display_tweets,like_button_clicked
     from .register_ui import handle_register, show_register_page
-
-
-          
+     
     def hide_current_view(self):
         """_summary_
         """
@@ -38,7 +36,6 @@ class UI:
         for l in list:
             l.destroy()
     
-
     def handle_login(self, event=None):
         """_summary_
 
@@ -55,8 +52,6 @@ class UI:
             self.display_tweets()
             self.userinstance= logged_in_user
             
-
-
     def show_login_page(self, event=None):
         """_summary_
 

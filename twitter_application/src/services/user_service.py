@@ -63,9 +63,7 @@ class UserService:
 
         Returns:
             object: User - object
-        """ 
-       
-            
+        """    
         cursor = self.connection.cursor()
         cursor.execute(
             "select * from user where username = ? and password = ?",
@@ -91,27 +89,6 @@ class UserService:
         rows = cursor.fetchall()
 
         return list(map(get_user_by_row, rows))
-
-
-    """ def insert_fake_users(self):
-               
-        self.fake_instance = Faker()    
-
-
-        username = self.fake_instance.name().strip(' ').lower()
-        print(username)
-        
-    
-        fake_user = User(str(uuid.uuid4()), "testname" "testusername", "testpwd", "url", False)
-
-        cursor = self.connection.cursor()
-        cursor.execute(
-            "insert into user (id, name, username, password, profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
-            (fake_user.id, fake_user.name, fake_user.username, fake_user.password, fake_user.profile_picture, fake_user.admin)
-        )
-
-        self.connection.commit()  """
-
 
 user_service = UserService(get_db_connection())
 

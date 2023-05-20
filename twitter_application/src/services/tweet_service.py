@@ -7,7 +7,6 @@ def get_tweet_by_row(row):
     return (Tweet(row[0],row[1], row[2], row[3], row[4]), row[5], row[6]) if row else None
 
 
-
 class TweetService:
     """ Class, which adds and returns tweets.
 
@@ -44,11 +43,9 @@ class TweetService:
             "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
             (new_tweet.id, new_tweet.user_id, new_tweet.send_time, new_tweet.message, new_tweet.picture_url,)
         )
-    
         self.connection.commit()
     
-        
-    
+
     def return_tweets(self):
         """ Return all tweets
 
@@ -57,10 +54,11 @@ class TweetService:
         """  
         cursor = self.connection.cursor()
      
-        cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username, COUNT(like.tweet_id) from tweet LEFT JOIN user ON tweet.user_id = user.id LEFT JOIN like ON tweet.id = like.tweet_id GROUP BY tweet.id")
+        cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username, COUNT(like.tweet_id) from tweet LEFT JOIN user ON tweet.user_id = user.id LEFT JOIN like ON tweet.id = like.tweet_id GROUP BY tweet.id, like.tweet_id ORDER BY tweet.send_time DESC")
 
         rows = cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
     
         return list(map(get_tweet_by_row, rows))
 

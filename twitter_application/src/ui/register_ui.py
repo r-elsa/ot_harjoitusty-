@@ -12,17 +12,12 @@ def handle_register(self, event=None):
         username = self.username.get()
         password = self.password.get()
 
-
-
         successful_register, registered_user = self.user_service.create_user(str(uuid.uuid4()),name, username, password, "url", False)
       
-
         if successful_register:
             self.show_dashboard()
             self.display_tweets()
             self.userinstance = registered_user
-
-
 
 def show_register_page(self, event = None):
         """_summary_
@@ -67,23 +62,6 @@ def show_register_page(self, event = None):
         register_button.bind("<Button-1>", self.handle_register)
 
      
-        """ left_side = ttk.Frame(master=self._root,)
-        right_side = ttk.Frame(master=self._root,)
-        left_side.grid(row=0, column=0)
-        right_side.grid(row=0, column=1)
-
-        entrybox = ttk.Entry(left_side)
-        listbox1 = ttk.Entry(left_side)
-        listbox2 = ttk.Entry(left_side)
-        listbox3 = ttk.Entry(left_side)
-        entrybox.grid(row=0, column=0)
-        listbox1.grid(row=2, column=0)
-        listbox2.grid(row=3, column=0)
-        listbox3.grid(row=4, column=0)
-
-        spinbox = ttk.Spinbox(right_side )
-
-        spinbox.grid(row=0, column=0) """
 
     
 
