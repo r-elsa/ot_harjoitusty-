@@ -7,7 +7,6 @@ from db_connection import get_db_connection
 def get_user_by_row(row):
         return User(row[0],row[1], row[2], row[3], row[4]) if row else None
 
-
 class UserService:
     """ Class, which adds and returns users.
 
@@ -80,7 +79,6 @@ class UserService:
         return (False, None)
 
 
-  
     def return_users(self):
         """
 

@@ -4,7 +4,7 @@ from db_connection import get_db_connection
 
  
 def get_tweet_by_row(row):
-    return (Tweet(row[0],row[1], row[2], row[3], row[4]), row[5]) if row else None
+    return (Tweet(row[0],row[1], row[2], row[3], row[4]), row[5], row[6]) if row else None
 
 
 
@@ -57,9 +57,10 @@ class TweetService:
         """  
         cursor = self.connection.cursor()
      
-        cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username from tweet LEFT JOIN user ON tweet.user_id = user.id")
+        cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username, COUNT(like.tweet_id) from tweet LEFT JOIN user ON tweet.user_id = user.id LEFT JOIN like ON tweet.id = like.tweet_id GROUP BY tweet.id")
 
         rows = cursor.fetchall()
+        print(rows)
     
         return list(map(get_tweet_by_row, rows))
 

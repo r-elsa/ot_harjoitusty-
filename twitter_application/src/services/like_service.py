@@ -31,11 +31,12 @@ class LikeService:
         Args:
             tweet_id (int): Id of the tweet that is being liked. 
         """ 
-        print(tweet_id, user_id) 
 
-        already_liked = self.like_exists(user_id, tweet_id)     
-        
-        if not already_liked:
+        already_liked = self.like_exists(user_id, tweet_id) 
+             
+        if already_liked:
+            return False
+        else:
             new_like = Like(str(uuid.uuid4()),user_id, tweet_id, time.time())   
             cursor = self.connection.cursor()
             cursor.execute(
@@ -45,7 +46,7 @@ class LikeService:
 
             self.connection.commit()
             return True
-        return False
+      
 
     def like_exists(self, user_id, tweet_id):
         cursor = self.connection.cursor()
@@ -54,9 +55,9 @@ class LikeService:
             (user_id,tweet_id)
         )
 
-        rows = cursor.fetchone()
-        print(rows)
-   
+        row = cursor.fetchone()
+        if row is not None:
+             return True 
         return False
 
 

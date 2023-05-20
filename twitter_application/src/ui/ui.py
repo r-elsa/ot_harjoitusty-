@@ -47,9 +47,7 @@ class UI:
         """        
         username = self.username.get()
         password = self.password.get()
-
-
-            
+  
         successful_login, logged_in_user =  self.user_service.login(username, password) 
 
         if successful_login:
