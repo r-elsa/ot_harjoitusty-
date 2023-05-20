@@ -12,11 +12,17 @@ def handle_register(self, event=None):
         username = self.username.get()
         password = self.password.get()
 
-        self.user_service.create_user(str(uuid.uuid4),name, username, password, "url", False)
-        self.user_service.return_users()
 
-        self.username= username
-        self.show_dashboard()
+
+        successful_register, registered_user = self.user_service.create_user(str(uuid.uuid4()),name, username, password, "url", False)
+      
+
+        if successful_register:
+            self.show_dashboard()
+            self.display_tweets()
+            self.userinstance = registered_user
+
+
 
 def show_register_page(self, event = None):
         """_summary_

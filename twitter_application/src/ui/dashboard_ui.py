@@ -36,7 +36,9 @@ def post_tweet(self,event):
         event (_type_): _description_
     """        
     tweet = self.tweet.get()
-    self.tweet_service.create_tweet(str(uuid.uuid4()),str(uuid.uuid4()), time.time(), tweet,  "picture_url") 
+    print(self.userinstance)
+    self.tweet_service.create_tweet(str(uuid.uuid4()),self.userinstance.id, time.time(), tweet,  "picture_url") 
+
 
 
     self.display_tweets()
@@ -59,7 +61,7 @@ def display_tweets(self):
         message = StringVar()
         message.set(tweets[i][0].message)
         user = StringVar()
-        user.set(tweets[i][1])
+        user.set(f"@{tweets[i][1]}")
 
         picture_url = StringVar()
         picture_url.set(tweets[i][0].picture_url)

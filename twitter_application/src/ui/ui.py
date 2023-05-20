@@ -19,9 +19,9 @@ class UI:
         """
         self._root = root
         self._current_view = None
-        self.username = None
+        self.userinstance  = None
         self.tweet_service= TweetService(get_db_connection())
-        self.user_service =  UserService(get_db_connection)
+        self.user_service =  UserService(get_db_connection())
         self.like_service = LikeService(get_db_connection())
         self.comment_service = CommentService(get_db_connection())
   
@@ -48,19 +48,14 @@ class UI:
         username = self.username.get()
         password = self.password.get()
 
-        instance = UserService(get_db_connection())
-        """ instance.insert_fake_users() """
-        
-        """ else:
 
-            instance = UserService(get_db_connection()) """
             
-        successful_login = instance.login(username, password) 
+        successful_login, logged_in_user =  self.user_service.login(username, password) 
 
         if successful_login:
             self.show_dashboard()
             self.display_tweets()
-            self.username= username
+            self.userinstance= logged_in_user
             
 
 

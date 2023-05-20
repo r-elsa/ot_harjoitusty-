@@ -59,10 +59,8 @@ class TweetService:
      
         cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username from tweet LEFT JOIN user ON tweet.user_id = user.id")
 
-  
         rows = cursor.fetchall()
     
-           
         return list(map(get_tweet_by_row, rows))
 
 tweet_service = TweetService(get_db_connection())

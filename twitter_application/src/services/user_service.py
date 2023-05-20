@@ -5,7 +5,7 @@ from db_connection import get_db_connection
 
 
 def get_user_by_row(row):
-        return User(row[0],row[1], row[2], row[3], row[4], row[5]) if row else None
+        return User(row[0],row[1], row[2], row[3], row[4]) if row else None
 
 
 class UserService:
@@ -26,9 +26,9 @@ class UserService:
         """ 
                  
         self.connection = connection
-        self.fake_instance = None
+        """ self.fake_instance = None """
 
-    def create_user(self, id,name, username, password, profile_picture, admin):
+    def create_user(self, id, name, username, password, profile_picture, admin):
         """ Create a new user.
 
         Args:
@@ -37,20 +37,24 @@ class UserService:
             password (string): password
         """
 
-      
-        new_user = User(id, name, username, password, profile_picture, admin)
         cursor = self.connection.cursor()
+
         cursor.execute(
+            "select * from user where username = ?",
+            (username,)
+        )
+        row = cursor.fetchone()
+        
+        if not row: 
+            new_user = User(id, name, username, password, profile_picture, admin)
+            cursor.execute(
             "insert into user (id, name, username, password, profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
             (new_user.id, new_user.name, new_user.username, new_user.password, new_user.profile_picture, new_user.admin,)
         )
-
-
-        self.connection.commit()
-        return new_user
-
-
-    
+            return (True, new_user)
+        return (False, None)
+        
+        
     def login(self, username, password):
         """ Login user using username and password
 
@@ -62,22 +66,21 @@ class UserService:
             object: User - object
         """ 
        
-             
-
+            
         cursor = self.connection.cursor()
         cursor.execute(
             "select * from user where username = ? and password = ?",
             (username,password)
         )
-        rows = cursor.fetchall()
+        row = cursor.fetchall()
+          
+        if row:  
+            user = list(map(get_user_by_row,row))[0]
+            return (True, user)
+        return (False, None)
 
-
-        hello = (map(get_user_by_row, rows))
-        return True
 
   
-
-
     def return_users(self):
         """
 
@@ -91,14 +94,6 @@ class UserService:
 
         return list(map(get_user_by_row, rows))
 
-
-    def count_users(self):
-        """ Count the amount of users
-
-        Returns:
-            int: amount of users
-        """        
-        return len(self.users)
 
     """ def insert_fake_users(self):
                

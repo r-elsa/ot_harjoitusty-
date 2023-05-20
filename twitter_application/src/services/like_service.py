@@ -31,19 +31,33 @@ class LikeService:
         Args:
             tweet_id (int): Id of the tweet that is being liked. 
         """ 
-        print(tweet_id, user_id)       
-        new_like = Like(str(uuid.uuid4()),"userid", tweet_id, time.time())
+        print(tweet_id, user_id) 
+
+        already_liked = self.like_exists(user_id, tweet_id)     
         
+        if not already_liked:
+            new_like = Like(str(uuid.uuid4()),user_id, tweet_id, time.time())   
+            cursor = self.connection.cursor()
+            cursor.execute(
+                "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
+                (new_like.id,new_like.user_id, new_like.tweet_id, new_like.send_time)
+            )
+
+            self.connection.commit()
+            return True
+        return False
+
+    def like_exists(self, user_id, tweet_id):
         cursor = self.connection.cursor()
         cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            (new_like.id,new_like.user_id, new_like.tweet_id, new_like.send_time)
+            "select * from like where user_id = ? and tweet_id = ?",
+            (user_id,tweet_id)
         )
 
-        self.connection.commit()
-        return True
-
-    
+        rows = cursor.fetchone()
+        print(rows)
+   
+        return False
 
 
 
