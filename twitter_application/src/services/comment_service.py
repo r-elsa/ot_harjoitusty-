@@ -21,13 +21,14 @@ class CommentService:
         """   
         self.connection = connection      
 
-    def comment(self,tweet_id):
+    def comment(self,tweet_id, user_id):
         """ Function to add a comment.
 
         Args:
             tweet_id (int): Id of the tweet to which the comment belongs.
         """        
-        new_comment = Comment(str(uuid.uuid4()),"userid", tweet_id, time.time(), "message")
+        
+        new_comment = Comment(str(uuid.uuid4()), user_id, tweet_id, time.time(), "this is the message")
 
         cursor = self.connection.cursor()
         cursor.execute(

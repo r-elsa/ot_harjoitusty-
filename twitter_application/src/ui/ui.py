@@ -24,9 +24,10 @@ class UI:
         self.user_service =  UserService(get_db_connection())
         self.like_service = LikeService(get_db_connection())
         self.comment_service = CommentService(get_db_connection())
+       
   
     
-    from .dashboard_ui import show_dashboard,post_tweet, display_tweets,like_button_clicked
+    from .dashboard_ui import show_dashboard,post_tweet, display_tweets,like_button_clicked,  show_comment_view, comment_button_clicked
     from .register_ui import handle_register, show_register_page
      
     def hide_current_view(self):

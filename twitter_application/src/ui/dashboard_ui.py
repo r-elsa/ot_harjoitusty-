@@ -17,14 +17,20 @@ def show_dashboard(self):
     heading = ttk.Label(master=self._root, text="Dashboard",
                         foreground="white",  background="black")
     heading.grid(row=0, column=0, columnspan=2, sticky=W)
+
+    img = Image.open(os.path.join(os.path.dirname(__file__), 'twitter_official.png'))
+    resized_image= img.resize((200,200), Image.ANTIALIAS)
+    new_image= ImageTk.PhotoImage(resized_image)
+    pic_label = ttk.Label(image=new_image)
+    pic_label.grid(row=0, column=0) 
     
     self.tweet = ttk.Entry(master=self._root)
     self.tweet.grid(row=1, column=1)
-    
+
     post_tweet_button = ttk.Button(master=self._root, text="Post tweet")
+
     post_tweet_button.grid (row=1, column=2)
 
-    self._root.grid_columnconfigure(1, weight=1)
     post_tweet_button.bind("<Button-1>", self.post_tweet)
     
     self.display_tweets()
@@ -41,24 +47,48 @@ def post_tweet(self,event):
     self.tweet_service.create_tweet(str(uuid.uuid4()),self.userinstance.id, time.time(), tweet,  "picture_url")    
     self.show_dashboard()
 
+
 def like_button_clicked(self, tweet_id, user_id):
     """_summary_
     """   
     self.like_service.like(tweet_id, user_id)
     self.display_tweets()
 
+
+def show_comment_view(self, tweet_id, user_id):
+    
+  
+    list = self._root.grid_slaves()
+    for l in list:
+        l.grid_forget()
+
+
+    heading = ttk.Label(master=self._root, text="Comments",
+                        foreground="white",  background="black")
+    heading.grid(row=0, column=0, columnspan=3, sticky=W)
+
+    
+    """self.comment = ttk.Entry(master=self._root)
+    self.comment.grid(row=1, column=1)
+
+    post_comment_button = ttk.Button(master=self._root, text="Post comment")
+    post_comment_button.grid (row=1, column=2)
+
+    post_comment_button.bind("<Button-1>", self.comment_button_clicked(tweet_id, user_id)) """
+    
+    #self.display_comments()
+
+    
+
+def comment_button_clicked(self, tweet_id, user_id):
+    self.comment_service.comment(tweet_id, user_id)
+    self.display_tweets()
     
 def display_tweets(self):
     """_summary_
     """  
-    tweets = self.tweet_service.return_tweets()
-    img = Image.open(os.path.join(os.path.dirname(__file__), 'twitter_official.png'))
-    resized_image= img.resize((50,50), Image.ANTIALIAS)
-    new_image= ImageTk.PhotoImage(resized_image)
-    pic_label = ttk.Label(image=new_image)
-    pic_label.grid(row=3, column=1) 
- 
 
+    tweets = self.tweet_service.return_tweets()
     for i in range(0,len(tweets)):
         
         message = StringVar()
@@ -85,8 +115,11 @@ def display_tweets(self):
         likebutton = ttk.Button(master=self._root, text="Like", command= lambda t= f"{tweets[i][0].id}": self.like_button_clicked(t, self.userinstance.id))
         likebutton.grid(row=303+i*2, column=3)
 
-        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i][0].id}": self.comment_service.comment(t,self.userinstance.id))
+        view_comments = ttk.Button(master=self._root, text="View comments", command= lambda t= f"{tweets[i][0].id}": self.show_comment_view(t, self.userinstance.id))
         view_comments.grid(row=303+i*2, column=4)
+   
+        
+    
 
 
         
