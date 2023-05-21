@@ -7,7 +7,6 @@
 - UI class added to display form and handle button click. 
 - User can register with name, username and password and is stored in an array. 
 
-
 ### Week 4
 Following functionality has been added:
 - User can create tweets
@@ -16,14 +15,20 @@ Following functionality has been added:
 -Tests for tweet creation and likes
 
 ### Week 5
-<<<<<<< HEAD
--Docstrings added
-=======
+
 Following functionality has been added:
 - Button to commment on a tweet
 - More information of a tweet displayed
+- Database connection, not configured yet though.
 
--Database connection, not configured yet though.
+### Week 6
+Following functionality has been added:
+- test coverage increased
+- improved documentation
 
-
->>>>>>> 3e5493bf967897ce680b1abd59eb3cea510b8b20
+### Week 7
+Following functionality has been added:
+- Mockdata
+- Database configuration
+- Comment view 
+- Error management on entry -widgets

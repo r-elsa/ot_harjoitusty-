@@ -11,8 +11,14 @@
 | 24.4 |  4    | added functionality of displaying tweet information and added database (not configured yet)|
 | 25.4 |  4    | improved style based on pylint, updated github release  |
 | 2.5  |  2    | added docstring-documentation and improved some other documentation|
-| 15.  |  3    | |
-Total:  27
+| 15.5 |  3    | inserting tweet, like, comment into tables and adding tables to db
+| 17.5 |  4    | configuring db, adding user-table to db|
+| 18.5 |  4    | adding test data, dividing ui.ui file to multiple files|
+| 19.5 |  5    | trying to add pictures to tkinter|
+| 20.5 |  5    | comment -view added,  like amount showcased, login and register error handling|
+| 21.5 |  6    | added config, some error handling, final database adjustments,  pylint fixes, documentation|
+
+Total:  53
 
 
 

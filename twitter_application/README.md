@@ -1,10 +1,10 @@
-## Twitter application
+# Twitter application
 
-The application enables users to view, like and comment tweets from people that they follow, and to write their own tweets.
+The application enables users to view, like and comment tweets as well as to write their own tweets.
 
-Technologies: python, TKInter and SQLite
+Technologies: python3, TKInter, SQLite and [Mimesis](https://mimesis.name/en/master/index.html) (external library).
 
-# Documentation
+## Documentation
 
 - [Instructions](./documentation/instructions.md)
 - [Requirement specification](./documentation/requirementspecification.md)
