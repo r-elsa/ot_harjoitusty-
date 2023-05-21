@@ -24,10 +24,10 @@ def show_comment_view(self, tweet_id, user_id):
     self.comment_error_label.grid(row =501, column =1)
 
     post_comment_button = ttk.Button(master=self._root, text="Post comment", command= lambda t= tweet_id: self.comment_button_clicked(t, user_id))
-    post_comment_button.grid (row=900, column=2)
+    post_comment_button.grid (row=5, column=2)
 
     return_button = ttk.Button(master=self._root, text="Back to tweet wall", command= self.show_dashboard)
-    return_button.grid(row=900, column=3)
+    return_button.grid(row=5, column=3)
   
 
 def display_comments(self, tweet_id, user_id):

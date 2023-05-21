@@ -1,9 +1,8 @@
 import sqlite3
+from config import DATABASE_FILE_PATH
 
-local_path = "sqlite/twitter.db"
-connection = sqlite3.connect(local_path)
+connection = sqlite3.connect(DATABASE_FILE_PATH)
 
 def get_db_connection():
     return connection
-
 

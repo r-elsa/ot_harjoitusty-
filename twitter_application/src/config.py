@@ -8,6 +8,9 @@ try:
 except FileNotFoundError:
     pass
 
-# jos os.getenv("FOO") palauttaa arvon None, FOO saa arvokseen "default bar"
-FOO = os.getenv("FOO") or "default bar"
-LOREM = os.getenv("LOREM") or "default ipsum"
+print(os.getenv("DATABASE_FILENAME"))
+DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "twitter.db"
+DATABASE_FILE_PATH =  os.path.join(dirname, "..", "sqlite", DATABASE_FILENAME)
+
+
+

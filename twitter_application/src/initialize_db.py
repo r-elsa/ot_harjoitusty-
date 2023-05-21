@@ -3,8 +3,6 @@ import time
 
 from mimesis import Person, Text, Datetime, Internet
 from mimesis.locales import Locale
-from mimesis import Internet
-""" from mimesis.utils import download_image """
 import random 
 
 
