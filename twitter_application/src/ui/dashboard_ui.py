@@ -42,7 +42,6 @@ def post_tweet(self,event):
     Args:
         event (_type_): _description_
     """     
-    print("POST TWEET")   
     tweet = self.tweet.get()
     self.tweet_service.create_tweet(str(uuid.uuid4()),self.userinstance.id, time.time(), tweet,  "picture_url")    
     self.show_dashboard()
@@ -56,33 +55,54 @@ def like_button_clicked(self, tweet_id, user_id):
 
 
 def show_comment_view(self, tweet_id, user_id):
-    
-  
-    list = self._root.grid_slaves()
-    for l in list:
-        l.grid_forget()
-
-
-    heading = ttk.Label(master=self._root, text="Comments",
+    self.hide_current_grid()
+    tweet = self.tweet_service.get_tweet_message(tweet_id)
+    heading = ttk.Label(master=self._root, text=f"Comments for tweet: {tweet}",
                         foreground="white",  background="black")
-    heading.grid(row=0, column=0, columnspan=3, sticky=W)
+    heading.grid(row=2, column=1, columnspan=10, rowspan= 10, sticky=W)
 
-    
-    """self.comment = ttk.Entry(master=self._root)
-    self.comment.grid(row=1, column=1)
+  
+    self.display_comments(tweet_id, user_id)
+    self.comment = ttk.Entry(master=self._root)
+    self.comment.grid(row=500, column=1)
 
-    post_comment_button = ttk.Button(master=self._root, text="Post comment")
-    post_comment_button.grid (row=1, column=2)
+    post_comment_button = ttk.Button(master=self._root, text="Post comment", command= lambda t= tweet_id: self.comment_button_clicked(t, user_id))
+    post_comment_button.grid (row=900, column=2)
+  
 
-    post_comment_button.bind("<Button-1>", self.comment_button_clicked(tweet_id, user_id)) """
-    
-    #self.display_comments()
+def display_comments(self, tweet_id, user_id):
 
-    
+    comments = self.comment_service.return_comments_for_tweet(tweet_id)
+  
+    for i in range(0,len(comments)):
+      
+        user = StringVar()
+        user.set(f"@{comments[i][1]}")
+       
+        message = StringVar()
+        message.set(comments[i][0].message)
+        
+       
+        send_time = StringVar()
+        send_time.set(comments[i][0].send_time)
+
+        
+        user_label = Label(master=self._root, textvariable = user )
+        user_label.grid(row=i*2+100, column=0)
+
+        message_label = Label(master=self._root, textvariable = message )
+        message_label.grid(row=i*2+100, column=1)
+
+        send_time_label = Label(master=self._root, textvariable = user )
+        send_time_label.grid(row=i*2+100, column=0)
+
+ 
 
 def comment_button_clicked(self, tweet_id, user_id):
-    self.comment_service.comment(tweet_id, user_id)
-    self.display_tweets()
+    message = self.comment.get()
+    self.comment_service.comment(tweet_id, user_id, message)
+    self.show_comment_view(tweet_id, user_id)
+    
     
 def display_tweets(self):
     """_summary_
@@ -119,7 +139,7 @@ def display_tweets(self):
         view_comments.grid(row=303+i*2, column=4)
    
         
-    
+
 
 
         

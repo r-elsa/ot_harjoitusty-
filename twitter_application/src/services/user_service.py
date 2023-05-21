@@ -35,7 +35,6 @@ class UserService:
             username (string): username of user
             password (string): password
         """
-
         cursor = self.connection.cursor()
 
         cursor.execute(

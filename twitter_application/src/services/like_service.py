@@ -33,7 +33,6 @@ class LikeService:
         """ 
 
         already_liked = self.like_exists(user_id, tweet_id) 
-        print(already_liked)
              
         if already_liked:
             return False

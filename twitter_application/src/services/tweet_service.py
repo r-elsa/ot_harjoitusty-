@@ -45,6 +45,17 @@ class TweetService:
         )
         self.connection.commit()
     
+    def get_tweet_message(self,tweet_id):
+
+        cursor = self.connection.cursor()
+
+        cursor.execute(
+            "select message from tweet where id = ?",
+            (tweet_id,)
+        )
+        row = cursor.fetchone()[0]
+        return row
+
 
     def return_tweets(self):
         """ Return all tweets
@@ -53,13 +64,10 @@ class TweetService:
             array: Array of tweet - objects.
         """  
         cursor = self.connection.cursor()
-     
         cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username, COUNT(like.tweet_id) from tweet LEFT JOIN user ON tweet.user_id = user.id LEFT JOIN like ON tweet.id = like.tweet_id GROUP BY tweet.id, like.tweet_id ORDER BY tweet.send_time DESC")
 
         rows = cursor.fetchall()
-        for row in rows:
-            print(row)
-    
+       
         return list(map(get_tweet_by_row, rows))
 
 tweet_service = TweetService(get_db_connection())

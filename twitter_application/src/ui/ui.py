@@ -25,9 +25,8 @@ class UI:
         self.like_service = LikeService(get_db_connection())
         self.comment_service = CommentService(get_db_connection())
        
-  
-    
-    from .dashboard_ui import show_dashboard,post_tweet, display_tweets,like_button_clicked,  show_comment_view, comment_button_clicked
+
+    from .dashboard_ui import show_dashboard,post_tweet, display_tweets,like_button_clicked,  show_comment_view, comment_button_clicked, display_comments
     from .register_ui import handle_register, show_register_page
      
     def hide_current_view(self):
@@ -36,6 +35,11 @@ class UI:
         list = self._root.grid_slaves()
         for l in list:
             l.destroy()
+    
+    def hide_current_grid(self):
+        list = self._root.grid_slaves()
+        for l in list:
+            l.grid_forget()
     
     def handle_login(self, event=None):
         """_summary_

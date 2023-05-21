@@ -17,6 +17,9 @@ faker = "^18.9.0"
 pillow = "^9.5.0"
 
 
+[tool.poetry.group.dev.dependencies]
+mimesis = "^10.0.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
