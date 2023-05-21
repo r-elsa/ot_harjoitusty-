@@ -22,13 +22,7 @@ Technologies: python, TKInter and SQLite
 poetry install
 ```
 
-2. Build the source and wheels archives
-
-```bash
-To be added when database is configured
-```
-
-3. Start application 
+2. Start application 
 
 ```bash
 poetry run invoke start
