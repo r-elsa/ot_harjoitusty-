@@ -8,7 +8,7 @@ class User:
         tweet_id (_type_, optional): _description_. Defaults to None.
         send_time (_type_, optional): _description_. Defaults to None.
         message (_type_, optional): _description_. Defaults to None.
-    """  
+    """
     def __init__(self, id, name, username, password, profile_picture=None, admin=False):
         """_summary_
 
@@ -18,7 +18,7 @@ class User:
             tweet_id (_type_, optional): _description_. Defaults to None.
             send_time (_type_, optional): _description_. Defaults to None.
             message (_type_, optional): _description_. Defaults to None.
-        """  
+        """
         self.id = id
         self.name = name
         self.username = username

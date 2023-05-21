@@ -1,8 +1,5 @@
-import uuid
 from entities.user import User
 from db_connection import get_db_connection
-""" from faker import Faker """
-
 
 def get_user_by_row(row):
         return User(row[0],row[1], row[2], row[3], row[4]) if row else None
@@ -11,19 +8,17 @@ class UserService:
     """ Class, which adds and returns users.
 
     Args:
-        id (int): Id of User. 
+        id (int): Id of User.
         users (array): Array of Users.
-      
-    """     
+
+    """
     def __init__(self, connection):
         """ The contructor of the class UserService
 
         Args:
-            id (int): Id of User. 
+            id (int): Id of User.
             users (array): Array of Users.
-            
-        """ 
-                 
+         """
         self.connection = connection
         """ self.fake_instance = None """
 
@@ -42,8 +37,8 @@ class UserService:
             (username,)
         )
         row = cursor.fetchone()
-        
-        if not row: 
+
+        if not row:
             new_user = User(id, name, username, password, profile_picture, admin)
             cursor.execute(
             "insert into user (id, name, username, password, profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
@@ -51,8 +46,8 @@ class UserService:
         )
             return (True, new_user)
         return (False, None)
-        
-        
+
+
     def login(self, username, password):
         """ Login user using username and password
 
@@ -62,15 +57,15 @@ class UserService:
 
         Returns:
             object: User - object
-        """    
+        """
         cursor = self.connection.cursor()
         cursor.execute(
             "select * from user where username = ? and password = ?",
             (username,password)
         )
         row = cursor.fetchall()
-          
-        if row:  
+
+        if row:
             user = list(map(get_user_by_row,row))[0]
             return (True, user)
         return (False, None)
@@ -78,10 +73,9 @@ class UserService:
 
     def return_users(self):
         """
-
         Returns:
             array: Array of User - objects
-        """  
+        """
 
         cursor = self.connection.cursor()
         cursor.execute("select * from user")

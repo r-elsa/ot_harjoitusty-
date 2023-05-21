@@ -1,11 +1,8 @@
-import uuid
 from entities.tweet import Tweet
 from db_connection import get_db_connection
 
- 
 def get_tweet_by_row(row):
     return (Tweet(row[0],row[1], row[2], row[3], row[4]), row[5], row[6]) if row else None
-
 
 class TweetService:
     """ Class, which adds and returns tweets.
@@ -67,7 +64,6 @@ class TweetService:
         cursor.execute("select tweet.id,tweet.user_id, tweet.send_time, tweet.message, tweet.picture_url, user.username, COUNT(like.tweet_id) from tweet LEFT JOIN user ON tweet.user_id = user.id LEFT JOIN like ON tweet.id = like.tweet_id GROUP BY tweet.id, like.tweet_id ORDER BY tweet.send_time DESC")
 
         rows = cursor.fetchall()
-       
         return list(map(get_tweet_by_row, rows))
 
 tweet_service = TweetService(get_db_connection())

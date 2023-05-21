@@ -105,211 +105,44 @@ def insert_testdata(connection):
   
     cursor = connection.cursor()
 
-    ## 1. users
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user1', 'Chelsea Yu', 'chelseayu_2020', 'chelseayu', 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user2', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user3', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user4', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user5', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user6', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
-    cursor.execute(
-            "insert into user  (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-            ('user7', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
-        )
-    
+    ## 1. 15 users
 
-    
-    """  date = Datetime(start=2023, end=2023, timezone=None) """
-
-   
-    ##  tweets (both hardcoded and taken from library mimesis )
+    # hardcoded testuser
     cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet1', 'user1', time.time(), 'We all enjoy thinking about the past because we miss memories.', 'url')
+            "insert into user (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+            ('user1', 'Chelsea Yu', 'me', 'me', 'url', False )
         )
     
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet2', 'user2', time.time(), ' Imagine ads before dreams every night.', 'url')
-        )
     
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet3', 'user3', time.time(), 'I wish it was already possible for AI to create music right for my mood.', 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet4', 'user4', time.time(), 'what do you like?', 'url')
-        )
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet5', 'user5', time.time(), 'I just refuse to take a single bite of my food until I find something good to watch.', 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet6', 'user1', time.time(),  text.sentence(), 'url')
-        )
-
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet7', 'user2', time.time(),  text.sentence(), 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet8', 'user2', time.time(),  text.quote(), 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet9', 'user3', time.time(),  text.sentence(), 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet10', 'user4', time.time(),  text.sentence(), 'url')
-        )
-    
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet11', 'user5', time.time(),  text.quote(), 'url')
-        )
-    cursor.execute(
-            "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
-            ('tweet12', 'user6', time.time(),  text.quote(), 'url')
-        )
-    
-
-    
-    ## likes
-
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like1', 'user1', 'tweet1', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like2', 'user1', 'tweet2', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like3', 'user1', 'tweet3', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like4', 'user2', 'tweet1', time.time())
-        )
-
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like5', 'user2', 'tweet5', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like6', 'user3', 'tweet4', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like7', 'user3', 'tweet3', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like8', 'user4', 'tweet1', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like9', 'user5', 'tweet3', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like10', 'user6', 'tweet2', time.time())
-        )
-    
-    ###
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like11', 'user6', 'tweet2', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like12', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like13', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like14', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like15', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like16', 'user6', 'tweet2', time.time())
-        )
-    
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like17', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like18', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like19', 'user6', 'tweet2', time.time())
-        )
-    cursor.execute(
-            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
-            ('like20', 'user6', 'tweet2', time.time())
-        )
-
-
-
-    for i in range(1,50):
+    for i in range(2,15):
     
         cursor.execute(
+                "insert into user (id, name, username, password, profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
+                (f'user{i}', person.full_name(), person.username(mask=None, drange=(1000, 2100)), person.password(length=8, hashed=False), 'url', False )
+            )
+   
+    # 30 tweets 
+    for i in range(1,30):
+    
+        cursor.execute(
+                "insert into tweet (id, user_id, send_time, message, picture_url) values (?, ?, ?, ?, ?)",
+                (f'tweet{i}', f"user{random.randint(0,15)}", time.time(), random.choice((text.sentence(),text.quote())), 'url')
+            )
+    
+   
+    ## 200 likes
+    for i in range(1,200):
+        cursor.execute(
+            "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
+            (f'like{i}', f"user{random.randint(0,15)}", f"tweet{random.randint(0,30)}", time.time())
+        )
+    
+    
+    # 100 comments
+    for i in range(1,100):
+        cursor.execute(
             "insert into comment (id, user_id, tweet_id, send_time, message) values (?, ?, ?, ?, ?)",
-            (f"comment{i}",f"user{random.randint(0,7)}", f"tweet{random.randint(0,12)}", time.time(),text.sentence())
+            (f"comment{i}",f"user{random.randint(0,15)}", f"tweet{random.randint(0,30)}", time.time(),text.sentence())
         ) 
  
     connection.commit()
@@ -320,7 +153,7 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
-    insert_testdata(connection)
+    insert_testdata(connection) # comment out this line if you want an empty database
    
 
 if __name__ == "__main__":

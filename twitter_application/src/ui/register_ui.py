@@ -8,16 +8,29 @@ def handle_register(self, event=None):
         Args:
             event (_type_, optional): _description_. Defaults to None.
         """         
-        name = self.name.get()
-        username = self.username.get()
-        password = self.password.get()
 
-        successful_register, registered_user = self.user_service.create_user(str(uuid.uuid4()),name, username, password, "url", False)
+        try:
+            name = self.name.get()
+            username = self.username.get()
+            password = self.password.get()
+            if not (name and username and password):
+                raise ValueError('Empty input field')
+            
+            successful_register, registered_user = self.user_service.create_user(str(uuid.uuid4()),name, username, password, "url", False)
       
-        if successful_register:
+            if not successful_register:
+                raise ValueError('Username already exists')
+            
             self.show_dashboard()
             self.display_tweets()
             self.userinstance = registered_user
+        
+        
+        except ValueError as e:
+            self.register_error_variable.set(e)
+            self.register_error_label.grid(row =6, column =1)
+
+        
 
 def show_register_page(self, event = None):
         """_summary_
@@ -39,8 +52,10 @@ def show_register_page(self, event = None):
         self.password = ttk.Entry(master=self._root)
 
         register_button = ttk.Button(master=self._root, text="REGISTER")
+        register_button.grid(row=7, column=1, columnspan=1)
 
         login_button = ttk.Button(master=self._root, text="LOGIN")
+        login_button.grid (row=7, column=0, columnspan=1)
 
         heading.grid(row=0, column=0, columnspan=2, sticky=W)
 
@@ -53,11 +68,17 @@ def show_register_page(self, event = None):
         password.grid(row=5, column=0)
         self.password.grid(row=5, column=1)
 
-        login_button.grid (row=7, column=0, columnspan=1)
-        
-        register_button.grid(row=7, column=1, columnspan=1)
+        self.register_error_variable = StringVar()
 
-        self._root.grid_columnconfigure(1, weight=1)
+        self.register_error_label = ttk.Label(
+                master=self._root,
+                textvariable=self.register_error_variable,
+                foreground="red"
+            )
+
+        self.register_error_label.grid(row =6, column =1)
+
+    
         login_button.bind("<Button-1>", self.show_login_page)
         register_button.bind("<Button-1>", self.handle_register)
 

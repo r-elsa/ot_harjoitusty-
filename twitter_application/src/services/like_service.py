@@ -10,34 +10,32 @@ class LikeService:
     """ Class, which adds and returns likes.
 
     Args:
-        id (int): Id of Like. 
+        id (int): Id of Like.
         likes(array): Array of Likes.
-      
-    """  
-    
+    """
+
     def __init__(self, connection):
         """ The contructor of the class LikeService
 
         Args:
-            id (int): Id of Like. 
+            id (int): Id of Like.
             likes(array): Array of Likes.
-            
-        """  
+        """
         self.connection = connection
 
     def like(self,tweet_id, user_id):
         """ Add a like
 
         Args:
-            tweet_id (int): Id of the tweet that is being liked. 
-        """ 
+            tweet_id (int): Id of the tweet that is being liked.
+        """
 
-        already_liked = self.like_exists(user_id, tweet_id) 
-             
+        already_liked = self.like_exists(user_id, tweet_id)
+
         if already_liked:
             return False
         else:
-            new_like = Like(str(uuid.uuid4()),user_id, tweet_id, time.time())   
+            new_like = Like(str(uuid.uuid4()),user_id, tweet_id, time.time())
             cursor = self.connection.cursor()
             cursor.execute(
                 "insert into like (id, user_id, tweet_id, send_time) values (?, ?, ?, ?)",
@@ -45,7 +43,6 @@ class LikeService:
             )
             self.connection.commit()
             return True
-      
 
     def like_exists(self, user_id, tweet_id):
         cursor = self.connection.cursor()
@@ -56,7 +53,7 @@ class LikeService:
 
         row = cursor.fetchone()
         if row is not None:
-             return True 
+             return True
         return False
 
     def return_likes(self):
@@ -64,7 +61,7 @@ class LikeService:
 
         Returns:
             array: Array of like - objects.
-        """  
+        """
         cursor = self.connection.cursor()
         cursor.execute("select * from like")
         rows = cursor.fetchall()
