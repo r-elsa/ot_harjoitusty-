@@ -2,63 +2,51 @@
 
 ## Purpose of the application
 
-The application enables users to view, like and comment tweets from people that they follow, and to write their own tweets.  
+The application enables users to view, like and comment on already posted tweets. The user can also write their own tweets.  
 
-## Users
+## Users and mock data
 
-The application has regular users. An admin user with increased rights will be added if time allows (see further development ideas).
+- The application has regular users. 
+- In order to enhance the user experience, the application does have mock data  (15 users, 30 tweets, 200 likes and 100 comments) 
+  inserted to the database on initialization, in order to mimic a social network.
+ - The mock data is retrieved from an external library [Mimesis](https://mimesis.name/en/master/index.html).
 
 ## UI draft
 
 The application consists of four different views:
 
-- login view DONE
-- signup view DONE
-- wall DONE
-- creation of new tweet DONE
+- login view 
+- signup view 
+- wall/dashboard
+- view comments and write new comment
 
 ## Functionality offered by the basic version
 
 ### Before signing/ logging in
 - user can register to application using usernname (unique, min 3 characters), password (min 6 characters) and name (min 2 characters)
-- once registered, user can login using username and password
+- once registered, a user can login using username and password
 - if the user does not exist, or the password does not match, the system will notify.
 
 ### After signing/logging in
 
-#### USER:
-- user can add profile picture.
-
-#### WALL OF TWEETS 
-- every user has their own 'wall' where their name and profile picture is shown. 
-- wall shows their own tweets and tweets from people that user follows. DONE
-- user can add tweets. DONE
-- max 15 tweets are shown on the wall and tweets are ranked based on the newest tweet. 
+#### WALL OF TWEETS/DASHBOARD
+- the wall shows the users own tweets and tweets from other people.
+- user can add tweets. 
+- max 30 tweets are shown on the wall and tweets are ranked based on the newest tweet. 
 
 #### TWEET, COMMENTING & LIKING
 - each tweet shows the following information:
-1) name of sender DONE
-2) time of tweet sending DONE
-3) message of tweet DONE
-4) possibily a picture and a text field (optional) DONE
+1) name of sender 
+2) time of tweet sending 
+3) message of tweet 
+4) amount of likes
+5) button to like tweet
+6) button to view comments and write a new comment
 
-- user can comment on tweets on their own wall (in the comment field of each picture). DONE
-- 5 newest comments are shown for each tweet.
-- user can like tweets on their wall. (by clicking like button by the tweet). DONE
-- same user can only like tweet once. 
+- user can like tweets on their wall by clicking the like button by the tweet.
+- same user can only like a tweet once. 
+- user can comment on tweets in the *comment* - view, which opens when the the user pushes the *View comments* - button
+- 10 newest comments are shown for each tweet.
 
-
-#### FOLLOWING AND FOLLOWERS
-- user can search other users based on their name
-- user can follow other people (following)
-- user can unfollow other people
-- user can see their amount of followers
-
-
-## Further development ideas
-- user can view individual followers and see when they started following.
-- user can reject an individual follower.
-- user can view tweets based on trending topics (all tweets, not only from people that the user follows. an additional category dropdown will be added to each tweet, which enables filtering by subject).
-- admin with priviledged rights.
 
 
