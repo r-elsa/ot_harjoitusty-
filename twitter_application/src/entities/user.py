@@ -1,4 +1,6 @@
 
+import uuid
+
 class User:
     """_summary_
 
@@ -9,7 +11,8 @@ class User:
         send_time (_type_, optional): _description_. Defaults to None.
         message (_type_, optional): _description_. Defaults to None.
     """
-    def __init__(self, id, name, username, password, profile_picture=None, admin=False):
+
+    def __init__(self, user_id, name, username, password, profile_picture=None, admin=False):
         """_summary_
 
         Args:
@@ -19,7 +22,7 @@ class User:
             send_time (_type_, optional): _description_. Defaults to None.
             message (_type_, optional): _description_. Defaults to None.
         """
-        self.id = id
+        self.user_id = user_id or str(uuid.uuid4())
         self.name = name
         self.username = username
         self.password = password

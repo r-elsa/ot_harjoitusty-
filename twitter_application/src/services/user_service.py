@@ -1,8 +1,9 @@
-from entities.user import User
 from db_connection import get_db_connection
+from entities.user import User
+
 
 def get_user_by_row(row):
-        return User(row[0],row[1], row[2], row[3], row[4]) if row else None
+    return User(row[0], row[1], row[2], row[3], row[4]) if row else None
 
 class UserService:
     """ Class, which adds and returns users.
@@ -22,7 +23,7 @@ class UserService:
         self.connection = connection
         """ self.fake_instance = None """
 
-    def create_user(self, id, name, username, password, profile_picture, admin):
+    def create_user(self, user_id, name, username, password, profile_picture, admin):
         """ Create a new user.
 
         Args:
@@ -39,14 +40,16 @@ class UserService:
         row = cursor.fetchone()
 
         if not row:
-            new_user = User(id, name, username, password, profile_picture, admin)
+            new_user = User(user_id, name, username, password,
+                            profile_picture, admin)
             cursor.execute(
-            "insert into user (id, name, username, password, profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
-            (new_user.id, new_user.name, new_user.username, new_user.password, new_user.profile_picture, new_user.admin,)
-        )
+                "insert into user (user_id, name, username, password,"\
+                "profile_picture, admin) values (?, ?, ?, ?, ?, ?)",
+                (new_user.user_id, new_user.name, new_user.username,
+                 new_user.password, new_user.profile_picture, new_user.admin,)
+            )
             return (True, new_user)
         return (False, None)
-
 
     def login(self, username, password):
         """ Login user using username and password
@@ -61,15 +64,14 @@ class UserService:
         cursor = self.connection.cursor()
         cursor.execute(
             "select * from user where username = ? and password = ?",
-            (username,password)
+            (username, password)
         )
         row = cursor.fetchall()
 
         if row:
-            user = list(map(get_user_by_row,row))[0]
+            user = list(map(get_user_by_row, row))[0]
             return (True, user)
         return (False, None)
-
 
     def return_users(self):
         """
@@ -83,7 +85,5 @@ class UserService:
 
         return list(map(get_user_by_row, rows))
 
+
 user_service = UserService(get_db_connection())
-
-
-

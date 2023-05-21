@@ -7,7 +7,7 @@ from services.comment_service import CommentService
 import time
 
 
-class TestUserService(unittest.TestCase):   
+class TestUserService(unittest.TestCase):
     def setUp(self):
         print("Set up goes here")
 
@@ -16,29 +16,24 @@ class TestUserService(unittest.TestCase):
         user.create_user("testname", "testusername", "testpwd123p2")
         amount_of_users = user.count_users()
         self.assertEqual(amount_of_users, 1)
-    
+
     def test_create_tweet(self):
         tweet = TweetService()
-        tweet.create_tweet("d2c38bbb-0fce-496d-bec7-d60348ed69fe","user",time.time(), "This is a tweet", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_Twitter%2C_Inc..svg/1024px-Logo_of_Twitter%2C_Inc..svg.png")
+        tweet.create_tweet("d2c38bbb-0fce-496d-bec7-d60348ed69fe", "user", time.time(), "This is a tweet",
+                           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_Twitter%2C_Inc..svg/1024px-Logo_of_Twitter%2C_Inc..svg.png")
         created_tweet = tweet.return_tweets()
         self.assertEqual(created_tweet[0].message, "This is a tweet")
-    
+
     def test_like(self):
         new_like = LikeService()
         new_like.like("d2c38bbb-0fce-496d-bec7-d60348ed69fe")
         created_like = new_like.return_likes()
-        self.assertEqual(created_like[0].tweet_id, "d2c38bbb-0fce-496d-bec7-d60348ed69fe")
-    
-     
+        self.assertEqual(created_like[0].tweet_id,
+                         "d2c38bbb-0fce-496d-bec7-d60348ed69fe")
+
     def test_comment(self):
         new_comment = CommentService()
         new_comment.comment("d2c38bbb-0fce-496d-bec7-d60348ed69fe")
         created_comment = new_comment.return_comments()
-        self.assertEqual(created_comment[0].tweet_id, "d2c38bbb-0fce-496d-bec7-d60348ed69fe")
-
-
-    
-    
-    
-
-     
+        self.assertEqual(
+            created_comment[0].tweet_id, "d2c38bbb-0fce-496d-bec7-d60348ed69fe")

@@ -1,6 +1,5 @@
 import uuid
 
-
 class Like:
     """_summary_
 
@@ -11,6 +10,7 @@ class Like:
         send_time (_type_, optional): _description_. Defaults to None.
         message (_type_, optional): _description_. Defaults to None.
     """
+
     def __init__(self, like_id=None, user_id=None, tweet_id=None, send_time=None):
         """_summary_
 
