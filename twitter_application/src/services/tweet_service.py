@@ -70,7 +70,7 @@ class TweetService:
                       "COUNT(like.tweet_id) from tweet LEFT JOIN user ON" \
                       " tweet.user_id = user.user_id LEFT JOIN like"\
                       " ON tweet.tweet_id = like.tweet_id GROUP BY tweet.tweet_id,"\
-                      " like.tweet_id ORDER BY tweet.send_time DESC")
+                      " like.tweet_id ORDER BY tweet.send_time DESC LIMIT 30")
 
         rows = cursor.fetchall()
         return list(map(get_tweet_by_row, rows))

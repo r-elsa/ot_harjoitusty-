@@ -51,7 +51,7 @@ class CommentService:
         cursor.execute(
             "select comment.comment_id, comment.user_id, comment.tweet_id, comment.send_time,"\
             "comment.message, user.username from comment LEFT JOIN user WHERE" \
-            " user.user_id = comment.user_id and comment.tweet_id = ? ORDER BY send_time",
+            " user.user_id = comment.user_id and comment.tweet_id = ? ORDER BY send_time LIMIT 10",
             (tweet_id,)
         )
         rows = cursor.fetchall()
