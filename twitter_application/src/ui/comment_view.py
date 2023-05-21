@@ -1,5 +1,6 @@
 from tkinter import Tk, ttk, W
 from tkinter import *
+from datetime import datetime
 
 
 def show_comment_view(self, tweet_id, user_id):
@@ -29,7 +30,7 @@ def show_comment_view(self, tweet_id, user_id):
 
     return_button = ttk.Button(
         master=self._root, text="Back to tweet wall", command=self.show_dashboard)
-    return_button.grid(row=5, column=4)
+    return_button.grid(row=5, column=7)
 
 
 def display_comments(self, tweet_id, user_id):
@@ -50,13 +51,16 @@ def display_comments(self, tweet_id, user_id):
         message.set(comments[i][0].message)
 
         send_time = StringVar()
-        send_time.set(comments[i][0].send_time)
+        send_time.set(datetime.fromtimestamp(comments[i][0].send_time))
+     
 
         user_label = Label(master=self._root, textvariable=user)
         user_label.grid(row=i*2+100, column=0)
+        
+        send_time_label = Label(master=self._root, textvariable=send_time)
+        send_time_label.grid(row=i*2+100, column=1)
 
         message_label = Label(master=self._root, textvariable=message)
-        message_label.grid(row=i*2+100, column=1)
+        message_label.grid(row=i*2+100, column=2)
 
-        send_time_label = Label(master=self._root, textvariable=user)
-        send_time_label.grid(row=i*2+100, column=0)
+       

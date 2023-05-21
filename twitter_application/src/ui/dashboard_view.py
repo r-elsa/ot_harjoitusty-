@@ -1,6 +1,7 @@
 import time
 import uuid
 import os
+from datetime import datetime
 from tkinter import Tk, ttk, W
 from tkinter import *
 from services.user_service import UserService
@@ -8,7 +9,6 @@ from services.tweet_service import TweetService
 from services.like_service import LikeService
 from services.comment_service import CommentService
 from db_connection import get_db_connection
-
 
 
 def show_dashboard(self):
@@ -60,27 +60,30 @@ def display_tweets(self):
         user = StringVar()
         user.set(f"@{tweets[i][1]}")
 
-        picture_url = StringVar()
-        picture_url.set(tweets[i][0].picture_url)
-
+        time_of_tweet = StringVar()
+        time_of_tweet.set(datetime.fromtimestamp(tweets[i][0].send_time))
+            
         likes = StringVar()
         likes.set(f"{tweets[i][2]}")
 
         user_label = Label(master=self._root, textvariable=user)
         user_label.grid(row=303+i*2, column=0)
 
+        time_of_tweet_label = Label(master=self._root, textvariable=time_of_tweet)
+        time_of_tweet_label.grid(row=303+i*2, column=1)
+
         message_label = Label(master=self._root, textvariable=message)
-        message_label.grid(row=303+i*2, column=1)
+        message_label.grid(row=303+i*2, column=2)
 
         like_label = Label(master=self._root, textvariable=likes)
-        like_label.grid(row=303+i*2, column=2)
+        like_label.grid(row=303+i*2, column=3)
 
         likebutton = ttk.Button(master=self._root, text="Like",
                                 command=lambda t=f"{tweets[i][0].tweet_id}": self.like_button_clicked(t, self.userinstance.user_id))
-        likebutton.grid(row=303+i*2, column=3)
+        likebutton.grid(row=303+i*2, column=4)
 
         view_comments = ttk.Button(master=self._root, text="View comments",
                                 command=lambda t=f"{tweets[i][0].tweet_id}": self.show_comment_view(t, self.userinstance.user_id))
-        view_comments.grid(row=303+i*2, column=4)
+        view_comments.grid(row=303+i*2, column=5)
 
 

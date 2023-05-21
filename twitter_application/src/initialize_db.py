@@ -92,7 +92,7 @@ def insert_testdata(connection):
     cursor.execute(
         "insert into user (user_id, name, username, password,"
         "profile_picture, admin)  values (?, ?, ?, ?, ?, ?)",
-        ('user1', 'Chelsea Yu', 'me', 'me', 'url', False)
+        ('user1', 'Chelsea Yu', 'chelseayu', 'chelseayu_8746', 'url', False)
     )
 
     for i in range(2, 15):
