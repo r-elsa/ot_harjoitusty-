@@ -1,12 +1,18 @@
 # Instructions 
 
-1. Install dependencies
+1. Download newest release
+
+2. Add configurations
+
+- modify database (DATABASE_FILENAME) in  *.env*- file to your liking. 
+
+3. Install dependencies
 
 ```bash
 poetry install
 ```
 
-2. Start application 
+4. Start application 
 
 ```bash
 poetry run invoke start
