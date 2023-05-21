@@ -6,30 +6,21 @@ def get_user_by_row(row):
     return User(row[0], row[1], row[2], row[3], row[4]) if row else None
 
 class UserService:
-    """ Class, which adds and returns users.
-
-    Args:
-        id (int): Id of User.
-        users (array): Array of Users.
-
+    """ Class, which logins, registers and returns users.
     """
     def __init__(self, connection):
-        """ The contructor of the class UserService
-
-        Args:
-            id (int): Id of User.
-            users (array): Array of Users.
-         """
-        self.connection = connection
-        """ self.fake_instance = None """
+         self.connection = connection
 
     def create_user(self, user_id, name, username, password, profile_picture, admin):
         """ Create a new user.
 
         Args:
-            name (string): name of user
-            username (string): username of user
-            password (string): password
+            user_id (string):  id of user
+            name (string):  full name of user 
+            username (string):  username (nickname) of user 
+            password(string): users' password
+            profile_picture(string): url to profile picture 
+            admin (boolean): whether the user is an admin or not
         """
         cursor = self.connection.cursor()
 
@@ -52,14 +43,14 @@ class UserService:
         return (False, None)
 
     def login(self, username, password):
-        """ Login user using username and password
+        """ User login using username and password
 
         Args:
             username (string): Username.
-            password (password): Password.
+            password (string): Password.
 
         Returns:
-            object: User - object
+            tuple (boolean, User object) : if user exists -> True, otherwise False
         """
         cursor = self.connection.cursor()
         cursor.execute(

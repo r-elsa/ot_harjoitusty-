@@ -5,7 +5,7 @@ from initialize_db import initialize_database
 
 
 def main():
-    """Main function which initialized tkinter and database.
+    """Main function which initialized database and Tkinter.
     """
     initialize_database()
     window = Tk()

@@ -8,6 +8,5 @@ try:
 except FileNotFoundError:
     pass
 
-print(os.getenv("DATABASE_FILENAME"))
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "twitter.db"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "sqlite", DATABASE_FILENAME)

@@ -4,6 +4,12 @@ from datetime import datetime
 
 
 def show_comment_view(self, tweet_id, user_id):
+    """ Viewing comments
+
+    Args:
+        tweet_id (string): id of tweet, to which comment belongs
+        user_id (string): user id of comment writer
+    """    
     self.hide_current_grid()
     tweet = self.tweet_service.get_tweet_message(tweet_id)
     heading = ttk.Label(master=self._root, text=f"Comments for tweet: {tweet}",
@@ -30,10 +36,16 @@ def show_comment_view(self, tweet_id, user_id):
 
     return_button = ttk.Button(
         master=self._root, text="Back to tweet wall", command=self.show_dashboard)
-    return_button.grid(row=5, column=7)
+    return_button.grid(row=5, column=10)
 
 
 def display_comments(self, tweet_id, user_id):
+    """ function for displaying comments
+
+    Args:
+        tweet_id (string): id of tweet, to which comment belongs
+        user_id (string): user id of comment writer
+    """    
 
     comments = self.comment_service.return_comments_for_tweet(tweet_id)
     if not comments:

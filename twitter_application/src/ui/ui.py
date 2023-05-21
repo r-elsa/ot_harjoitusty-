@@ -9,14 +9,23 @@ from db_connection import get_db_connection
 
 
 class UI:
-    """_summary_
+    """ Main UI class
     """
 
     def __init__(self, root):
         """_summary_
 
         Args:
-            root (_type_): _description_
+            root (Tkinter): root wondow
+            login_error_variable (None/Tkinter object): showcasing errors
+            register_error_variable (None/Tkinter object): showcasing errors
+            tweet_error_variable (None/Tkinter object): showcasing errors
+            login_error_variable (None/Tkinter object): showcasing errors
+            userinstance (User- instance): user who is logged in/registered
+            tweet_service = TweetService : instances of  tweet service
+            user_service = UserService : instance of user service
+            like_service = LikeService : instance of like service
+            comment_service = CommentService: instance of commentservice
         """
         self._root = root
         self.login_error_variable = None
@@ -36,20 +45,22 @@ class UI:
     from .login_view import show_login_page, handle_login
 
     def hide_current_view(self):
-        """_summary_
+        """ destroying current variables grid 
         """
         list = self._root.grid_slaves()
         for l in list:
             l.destroy()
 
     def hide_current_grid(self):
+        """ hiding current variables in grid 
+        """
         list = self._root.grid_slaves()
         for l in list:
             l.grid_forget()
 
    
     def start(self):
-        """ Initializing function.
+        """ Initializing TkInter
         """
         self.show_login_page()
 

@@ -4,10 +4,8 @@ import uuid
 
 
 def show_register_page(self, event=None):
-    """_summary_
+    """ Function, which renders register - page
 
-    Args:
-        event (_type_, optional): _description_. Defaults to None.
     """
     self.hide_current_view()
     heading = ttk.Label(master=self._root, text="Register",
@@ -55,11 +53,8 @@ def show_register_page(self, event=None):
 
 
 def handle_register(self, event=None):
-    """_summary_
-
-    Args:
-        event (_type_, optional): _description_. Defaults to None.
-    """
+    """ function, which handles register and raises ValueError on invalid input
+        """
 
     try:
         name = self.name.get()

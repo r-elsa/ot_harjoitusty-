@@ -7,30 +7,19 @@ def get_tweet_by_row(row):
 
 
 class TweetService:
-    """ Class, which adds and returns tweets.
-
-    Args:
-        id (int): Id of Tweet. 
-        tweets (array): Array of Tweets.
-
+    """ Class, which creates and returns tweets 
+        as well as returns tweet message (for commentservice)
     """
 
     def __init__(self, connection):
-        """ The contructor of the class TweetService
-
-        Args:
-            id (int): Id of Tweet. 
-            tweets (array): Array of Tweets.
-
-        """
         self.connection = connection
 
     def create_tweet(self, tweet_id, user_id, send_time, message, picture_url):
-        """ Post a new tweet
+        """ Create/Post a new tweet
 
         Args:
-            id (int)): id of Tweet 
-            user (int): id of user who posted tweet
+            tweet_id (string)): id of tweet 
+            user (string): id of user who posted tweet
             send_time (date): date when tweet was posted
             message (string): content of tweet
             picture_url (string): url of picture added to tweet
@@ -48,6 +37,11 @@ class TweetService:
         self.connection.commit()
 
     def get_tweet_message(self, tweet_id):
+        """ function that returns twet message based on tweet id
+
+        Args:
+            tweet_id (string)): id of tweet 
+        """
 
         cursor = self.connection.cursor()
 
@@ -59,7 +53,7 @@ class TweetService:
         return row
 
     def return_tweets(self):
-        """ Return all tweets
+        """ Returns all tweets, orders by time and limits to 30 tweets
 
         Returns:
             array: Array of tweet - objects.
@@ -74,6 +68,5 @@ class TweetService:
 
         rows = cursor.fetchall()
         return list(map(get_tweet_by_row, rows))
-
 
 tweet_service = TweetService(get_db_connection())

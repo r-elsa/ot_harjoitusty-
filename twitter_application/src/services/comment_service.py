@@ -10,10 +10,6 @@ def get_comment_by_row(row):
 
 class CommentService:
     """Class, which adds and returns comments.
-
-    Attributes:
-        id: id of CommentService.
-        comments: Comments of Tweets.
     """
 
     def __init__(self, connection):
@@ -25,7 +21,9 @@ class CommentService:
         """ Function to add a comment.
 
         Args:
-            tweet_id (int): Id of the tweet to which the comment belongs.
+            tweet_id (string): Id of the tweet to which the comment belongs.
+            user_id (string): Id of the user to which the comment belongs.
+            message(string): The content of the comment
         """
 
         new_comment = Comment(str(uuid.uuid4()), user_id,
@@ -45,7 +43,7 @@ class CommentService:
         """ Function to return all comments.
 
         Returns:
-            array: comment - objects
+            array: of comment-objects as well as username
         """
         cursor = self.connection.cursor()
         cursor.execute(

@@ -19,8 +19,8 @@ class TestUserService(unittest.TestCase):
 
     def test_create_tweet(self):
         tweet = TweetService()
-        tweet.create_tweet("d2c38bbb-0fce-496d-bec7-d60348ed69fe", "user", time.time(), "This is a tweet",
-                           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_Twitter%2C_Inc..svg/1024px-Logo_of_Twitter%2C_Inc..svg.png")
+        tweet.create_tweet("d2c38bbb-0fce-496d-bec7-d60348ed69fe", "user1", time.time(), "This is a tweet",
+                           "img")
         created_tweet = tweet.return_tweets()
         self.assertEqual(created_tweet[0].message, "This is a tweet")
 

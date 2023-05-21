@@ -2,25 +2,17 @@
 import uuid
 
 class User:
-    """_summary_
-
-    Args:
-        comment_id (_type_, optional): _description_. Defaults to None.
-        user (_type_, optional): _description_. Defaults to None.
-        tweet_id (_type_, optional): _description_. Defaults to None.
-        send_time (_type_, optional): _description_. Defaults to None.
-        message (_type_, optional): _description_. Defaults to None.
-    """
-
     def __init__(self, user_id, name, username, password, profile_picture=None, admin=False):
-        """_summary_
+        """ This is the class that describes a user
 
         Args:
-            comment_id (_type_, optional): _description_. Defaults to None.
-            user (_type_, optional): _description_. Defaults to None.
-            tweet_id (_type_, optional): _description_. Defaults to None.
-            send_time (_type_, optional): _description_. Defaults to None.
-            message (_type_, optional): _description_. Defaults to None.
+            user_id (string):  id of user
+            name (string):  full name of user 
+            username (string):  username (nickname) of user 
+            password(string): users' password
+            profile_picture(string): url to profile picture 
+            admin (boolean): whether the user is an admin or not
+          
         """
         self.user_id = user_id or str(uuid.uuid4())
         self.name = name

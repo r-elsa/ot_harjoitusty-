@@ -9,19 +9,14 @@ def get_like_by_row(row):
 
 
 class LikeService:
-    """ Class, which adds and returns likes.
-
-    Args:
-        id (int): Id of Like.
-        likes(array): Array of Likes.
+    """ Class, which adds and returns likes and also checks if a user has already liked a tweet.
     """
 
     def __init__(self, connection):
         """ The contructor of the class LikeService
 
         Args:
-            id (int): Id of Like.
-            likes(array): Array of Likes.
+            connection : connection to database
         """
         self.connection = connection
 
@@ -29,9 +24,9 @@ class LikeService:
         """ Add a like
 
         Args:
-            tweet_id (int): Id of the tweet that is being liked.
+            tweet_id (string): Id of the tweet that is being liked.
+            user_id (string): Id of user who likes the tweet
         """
-
         already_liked = self.like_exists(user_id, tweet_id)
 
         if already_liked:
@@ -48,6 +43,13 @@ class LikeService:
         return True
 
     def like_exists(self, user_id, tweet_id):
+        """ check if like already exists
+
+        Args:
+            tweet_id (string): Id of the tweet that is being liked.
+            user_id (string): Id of user who likes the tweet
+        """
+
         cursor = self.connection.cursor()
         cursor.execute(
             "select * from like where user_id = ? and tweet_id = ?",

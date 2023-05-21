@@ -1,6 +1,6 @@
 import random
 import time
-from mimesis import Person, Text, Datetime
+from mimesis import Person, Text
 from mimesis.locales import Locale
 from db_connection import get_db_connection
 

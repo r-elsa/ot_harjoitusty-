@@ -3,10 +3,8 @@ from tkinter import *
 import uuid
 
 def show_login_page(self, event=None):
-        """_summary_
+        """ Function that renders the login - page
 
-        Args:
-            event (_type_, optional): _description_. Defaults to None.
         """
         self.hide_current_view()
         heading = ttk.Label(master=self._root, text="Login",
@@ -40,10 +38,7 @@ def show_login_page(self, event=None):
         register_button.bind("<Button-1>", self.show_register_page)
 
 def handle_login(self, event=None):
-        """_summary_
-
-        Args:
-            event (_type_, optional): _description_. Defaults to None.
+        """ function, which handles user login and raises ValueError on invalid input
         """
 
         try:

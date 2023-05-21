@@ -12,8 +12,9 @@ from db_connection import get_db_connection
 
 
 def show_dashboard(self):
-    """_summary_
-    """
+    """ Function which renders the dasboard including entry field, and button to post a new tweet
+    """    
+   
     self.hide_current_view()
     heading = ttk.Label(master=self._root, text="Dashboard",
                         foreground="white",  background="black")
@@ -43,7 +44,7 @@ def show_dashboard(self):
 
 
 def display_tweets(self):
-    """_summary_
+    """ Function to display all existing tweets
     """
     tweets = self.tweet_service.return_tweets()
     if not tweets:
